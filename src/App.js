@@ -1,10 +1,11 @@
 // import firebase from './firebase.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Search from './Search'
 
 function App() {
+  const [book, setBook] = useState('');
   useEffect(() => {
     axios({
       url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -20,15 +21,15 @@ function App() {
       const booksDataArray= booksData.items
       console.log(booksData.items)
       booksDataArray.map((bookObj)=> {
-        console.log(bookObj.volumeInfo.title, bookObj.volumeInfo.authors)
+        // console.log(bookObj.volumeInfo.title, bookObj.volumeInfo.authors)
       })
 
     })
-  }, []);
+  }, [book]);
   return(
     <>
     <h1>Page Turner App</h1>
-    <Search /> 
+    <Search searchBook = {book} /> 
     </>
     
   ) 
