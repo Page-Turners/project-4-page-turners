@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import Search from './Search'
 
 function App() {
   useEffect(() => {
@@ -11,15 +12,27 @@ function App() {
       dataResponse: 'json',
       params: {
         key: "AIzaSyDKgwjUjoEPLSTlCBheUgeuCpqTxirPtGM",
-        q: "flowers",
+        q: "derrida",
         inauthor: 'keyes',
       }
     }).then((res) => {
       const booksData = res.data;
+      const booksDataArray= booksData.items
+      console.log(booksData.items)
+      booksDataArray.map((bookObj)=> {
+        console.log(bookObj.volumeInfo.title, bookObj.volumeInfo.authors)
+      })
 
     })
   }, []);
-  return <h1>Page Turner App</h1>
+  return(
+    <>
+    <h1>Page Turner App</h1>
+    <Search /> 
+    </>
+    
+  ) 
+
 
 };
 
