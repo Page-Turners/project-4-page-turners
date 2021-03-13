@@ -3,20 +3,21 @@ import { useEffect, useState } from 'react'
 function Search(props) {
   const searchBook = props
   const [userChoice, setUserChoice] = useState('placeholder')
-  //   handles submit
-  const handleSubmit = (event) => {
-    const selectedRadio = document.querySelector('input[type ="radio"]:checked')
-      .id
-    event.preventDefault()
-    console.log(selectedRadio)
-    // stores the search query
-    const searchQuery = event.target[0].value
-    setUserChoice(searchQuery)
+  
+  
+   // stores the search query
+  const handleRadioOption = (event) => {
+      const searchQuery = event.target[0].value
+      setUserChoice(searchQuery)
   }
 
-  // const handleRadioOption = (event) => {
-  //   console.log(event)
-  // }
+  //   handles submit
+  const handleSubmit = (event) => {
+    const selectedRadio = document.querySelector('input[type ="radio"]:checked').id
+    event.preventDefault()
+    console.log(selectedRadio) 
+  }
+
 
   return (
     <div>
