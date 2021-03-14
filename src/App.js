@@ -8,54 +8,56 @@ function App() {
   // books is an array
   const [book, setBook] = useState([])
   // results is an empty array
-  const [result, setResult] = useState("derrida")
-  const [searchType, setSearchType] = useState("author")
+  const [result, setResult] = useState('derrida')
+  const [searchType, setSearchType] = useState('author')
 
   //   handles submit on searchbar
   const handleSubmit = (event) => {
-    const selectedRadio = document.querySelector('input[type ="radio"]:checked').id
-    const selectedText = document.getElementById('bookSearch').value;
+    const selectedRadio = document.querySelector('input[type ="radio"]:checked')
+      .id
+    const selectedText = document.getElementById('bookSearch').value
     event.preventDefault()
 
     setResult(selectedText)
-    setSearchType(selectedRadio);
+    setSearchType(selectedRadio)
 
-    console.log("Type: " + searchType + " Text: " + result)
+    console.log('Type: ' + searchType + ' Text: ' + result)
     // searchBook.changeBook("selectedRadio");
   }
 
   return (
     <>
-      <h1>Page Turner App</h1>
+      <header>
+        <h1>Page Turner App</h1>
+      </header>
+      <section className='form-field'>
+        <form action='' onSubmit={handleSubmit}>
+          <label htmlFor='bookSearch'></label>
+          <input type='text' id='bookSearch' placeholder='Search Here...' />
+          <fieldset>
+            <label htmlFor='author'>Author</label>
+            <input
+              type='radio'
+              id='author'
+              value='author'
+              name='searchType'
+              // onChange={handleRadioOption}
+            />
 
-      <form action='' onSubmit={handleSubmit}>
-        <label htmlFor='bookSearch'>What would you like to read?</label>
-        <input type='text' id='bookSearch' />
+            <label htmlFor='title'>Title</label>
+            <input
+              type='radio'
+              id='title'
+              value='title'
+              name='searchType'
+              // onChange={handleRadioOption}
+            />
+          </fieldset>
+          <button>Find Me A Book! </button>
+        </form>
+      </section>
 
-        <label htmlFor='author'>Author</label>
-        <input
-          type='radio'
-          id='author'
-          value='author'
-          name='searchType'
-        // onChange={handleRadioOption}
-        />
-
-        <label htmlFor='title'>Title</label>
-        <input
-          type='radio'
-          id='title'
-          value='title'
-          name='searchType'
-        // onChange={handleRadioOption}
-        />
-
-        <button>Find Me A Book! </button>
-      </form>
-      <Search
-        type={searchType}
-        text={result}
-      />
+      <Search type={searchType} text={result} />
     </>
   )
 }
