@@ -1,50 +1,49 @@
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 function Search(props) {
   const searchBook = props
-  const [userChoice, setUserChoice] = useState('placeholder')
+  const searchObj = {};
+ // const [userChoice, setUserChoice] = useState('')
   
+  searchObj.userSearch = searchBook.text;
+  searchObj.userChoice = searchBook.type;
   
+
    // stores the search query
-  const handleRadioOption = (event) => {
-      const searchQuery = event.target[0].value
-      setUserChoice(searchQuery)
-  }
+  // const handleRadioOption = (event) => {
+  //     const searchQuery = event.target[0].value
+  //     setUserChoice(searchQuery)
+  // }
 
-  //   handles submit
-  const handleSubmit = (event) => {
-    const selectedRadio = document.querySelector('input[type ="radio"]:checked').id
-    event.preventDefault()
-    console.log(selectedRadio) 
-  }
-
+  useEffect(() => {
+    axios({
+      url: `https://www.googleapis.com/books/v1/volumes?`,
+      method: 'GET',
+      dataResponse: 'json',
+      params: {
+        key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
+        q: searchObj.userSearch ,
+        inauthor: searchObj.userSearch,
+        
+      },
+    }).then((res) => {
+      console.log(res.data.items);
+      // const booksData = res.data
+      // console.log(res.data)
+      // const booksDataArray = booksData.items
+      // console.log(booksData.items)
+      // booksDataArray.map((bookObj) => {
+      //   // console.log(bookObj.volumeInfo.title, bookObj.volumeInfo.authors)
+      // })
+      // console.log(book)
+      //setBook(res.data.items)
+    })
+  }, [])
 
   return (
     <div>
-      <form action='' onSubmit={handleSubmit}>
-        <label htmlFor='bookSearch'>What would you like to read?</label>
-        <input type='text' id='bookSearch' value={userChoice} />
-
-        <label htmlFor='author'>Author</label>
-        <input
-          type='radio'
-          id='author'
-          value='author'
-          name='searchType'
-          // onChange={handleRadioOption}
-        />
-
-        <label htmlFor='title'>Title</label>
-        <input
-          type='radio'
-          id='title'
-          value='title'
-          name='searchType'
-          // onChange={handleRadioOption}
-        />
-
-        <button>Find Me A Book! </button>
-      </form>
+     <p>SeachBar: {props.text} Radio: {props.type}</p>
     </div>
   )
 }
