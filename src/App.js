@@ -9,8 +9,7 @@ function App() {
   const [book, setBook] = useState([])
   // results is an empty array
   const [result, setResult] = useState("derrida")
-  const [searchType,setSearchType] = useState("author")
-
+  const [searchType, setSearchType] = useState("author")
 
   //   handles submit on searchbar
   const handleSubmit = (event) => {
@@ -22,7 +21,7 @@ function App() {
     setSearchType(selectedRadio);
 
     console.log("Type: " + searchType + " Text: " + result)
-   // searchBook.changeBook("selectedRadio");
+    // searchBook.changeBook("selectedRadio");
   }
 
   return (
@@ -31,7 +30,7 @@ function App() {
 
       <form action='' onSubmit={handleSubmit}>
         <label htmlFor='bookSearch'>What would you like to read?</label>
-        <input type='text' id='bookSearch'  />
+        <input type='text' id='bookSearch' />
 
         <label htmlFor='author'>Author</label>
         <input
@@ -53,9 +52,9 @@ function App() {
 
         <button>Find Me A Book! </button>
       </form>
-      <Search 
-      type={searchType}
-      text={result}
+      <Search
+        type={searchType}
+        text={result}
       />
     </>
   )
