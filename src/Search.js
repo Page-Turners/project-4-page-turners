@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';//import firebase into our component
+
+
 import firebase from './firebase.js';
 
 function Search(props) {
@@ -60,20 +62,37 @@ function Search(props) {
       setLoading(false);
     }
   }
-  useEffect(() => {
-    getSearchedBook(searchObj)
-  }, [searchBook]);
 
+  useEffect(() => {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (data) => {
+      // save the database object within a variable
+      const bookData = data.val();
+      //create a variable equal to an empty array
+      const bookHold = [];
+      //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
+      for (let bookKey in bookData) {
+        bookHold.push({
+          uniqueKey: bookKey,
+          title: bookData[bookKey]
+        });
+        console.log(bookHold);
+      }
+    })
+    getSearchedBook(searchObj)
+  }, [searchBook])
 
   const handleClick = (e) => {
     const dbRef = firebase.database().ref();
     dbRef.push(e);
   }
-  const handleRemove = (e) => {
+
+  const handleRemove = (event) => {
     const dbRef = firebase.database().ref();
-    dbRef.child(e).remove();
-    console.log(e);
+    dbRef.child(event.id).remove();
+    console.log(event.id);
   }
+
   return (
     <section className='search-container wrapper'>
       {searchResult.map((bookResult) => {
@@ -91,8 +110,10 @@ function Search(props) {
             <p>{bookResult.volumeInfo.authors}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p>
-            <button onClick={() => { handleClick(bookResult) }}>Add to List!</button>
-            <button onClick={() => { handleRemove(bookResult.id) }}>remove from List!</button>
+            <button onClick={() => handleClick(bookResult)}>Add to List!</button>
+            <button onClick={() => {
+              handleRemove(bookResult.id)
+            }}>remove from List!</button>
           </div>
         )
       })}

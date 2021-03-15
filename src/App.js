@@ -1,7 +1,9 @@
 // import firebase from './firebase.js';
 import { useState } from 'react';
 import './App.css'
-import Search from './Search'
+import Search from './Search';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { fasBookMark } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   // books is an array
@@ -19,17 +21,16 @@ function App() {
       .id
     const selectedText = document.getElementById('bookSearch').value
     event.preventDefault()
-
     setResult(selectedText)
     setSearchType(selectedRadio)
-
-    console.log('Type: ' + searchType + ' Text: ' + result)
   }
 
   return (
     <>
       <header>
         <h1>Page Turner App</h1>
+        {/* <button className="iconBtn">
+          <FontAwesomeIcon icon={fasBookMark} /></button> */}
       </header>
       <section className='form-field'>
         {error ? <div> Enter a Valid value </div> :
