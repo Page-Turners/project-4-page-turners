@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';//import firebase into our component
-
-
 import firebase from './firebase.js';
+import ReadingList from './ReadingList';
 
 function Search(props) {
   const [searchResult, setSearchResult] = useState([]);
+  const [booksArray, setBooksArray] = useState([]);
 
   const { error, setError, loading, setLoading } = props;
   const searchBook = props
@@ -72,14 +72,17 @@ function Search(props) {
       const bookHold = [];
       //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
       for (let bookKey in bookData) {
+        console.log(bookKey);
+        console.log(bookData);
         bookHold.push({
           uniqueKey: bookKey,
-          title: bookData[bookKey]
+          bookObj: bookData[bookKey]
         });
         console.log(bookHold);
       }
+      setBooksArray(bookHold);
     })
-    getSearchedBook(searchObj)
+    getSearchedBook(searchObj);
   }, [searchBook])
 
   const handleClick = (e) => {
@@ -89,7 +92,7 @@ function Search(props) {
 
   const handleRemove = (event) => {
     const dbRef = firebase.database().ref();
-    dbRef.child(event.id).remove();
+    dbRef.child(event).remove();
     console.log(event.id);
   }
 
@@ -112,12 +115,14 @@ function Search(props) {
             <p>{bookResult.volumeInfo.averageRating}</p>
             <button onClick={() => handleClick(bookResult)}>Add to List!</button>
             <button onClick={() => {
-              handleRemove(bookResult.id)
+              handleRemove(bookResult.uniqueKey)
             }}>remove from List!</button>
           </div>
         )
       })}
+      <ReadingList booksArray={booksArray} />
     </section>
+
   )
 }
 
