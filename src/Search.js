@@ -1,66 +1,85 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';//import firebase into our component
+import firebase from './firebase.js';
 
 function Search(props) {
-  const [searchResult, setSearchResult] = useState([])
+  const [searchResult, setSearchResult] = useState([]);
+
+  const { error, setError, loading, setLoading } = props;
   const searchBook = props
   const searchObj = {}
-  // const [userChoice, setUserChoice] = useState('')
 
   searchObj.userSearch = searchBook.text
   searchObj.userChoice = searchBook.type
 
-  // stores the search query
-  // const handleRadioOption = (event) => {
-  //     const searchQuery = event.target[0].value
-  //     setUserChoice(searchQuery)
-  // }
   const getSearchedBook = (searchBook) => {
     if (searchBook.userChoice === 'author') {
-      console.log('author found')
-      axios({
-        url: `https://www.googleapis.com/books/v1/volumes?`,
-        method: 'GET',
-        dataResponse: 'json',
-        params: {
-          key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-          q: searchBook.userSearch,
-          inauthor: searchBook.userSearch,
-        },
-      }).then((res) => {
-        console.log(res.data.items)
-        setSearchResult(res.data.items)
-      })
+      setLoading(true);
+      setError(false);
+      // console.log('author found');
+      try {
+        axios({
+          url: `https://www.googleapis.com/books/v1/volumes?`,
+          method: 'GET',
+          dataResponse: 'json',
+          params: {
+            key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
+            q: searchBook.userSearch,
+            inauthor: searchBook.userSearch,
+            maxResults: 40
+          },
+        }).then((res) => {
+          // console.log(res.data.items)
+          setSearchResult(res.data.items)
+        })
+      } catch (error) {
+        setError(true);
+      }
+      setLoading(false)
     } else if (searchBook.userChoice === 'title') {
-      axios({
-        url: `https://www.googleapis.com/books/v1/volumes?`,
-        method: 'GET',
-        dataResponse: 'json',
-        params: {
-          key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-          q: searchBook.userSearch,
-          intitle: searchBook.userSearch,
-        },
-      }).then((res) => {
-        console.log(res.data.items)
-        setSearchResult(res.data.items)
-      })
-      console.log('title found')
+      setLoading(true);
+      setError(false);
+      try {
+        axios({
+          url: `https://www.googleapis.com/books/v1/volumes?`,
+          method: 'GET',
+          dataResponse: 'json',
+          params: {
+            key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
+            q: searchBook.userSearch,
+            intitle: searchBook.userSearch,
+          },
+        }).then((res) => {
+          console.log(res.data.items)
+          setSearchResult(res.data.items)
+        })
+        console.log('title found')
+      } catch (error) {
+        setError(true);
+      }
+      setLoading(false);
     }
   }
-
   useEffect(() => {
-    {
-      getSearchedBook(searchObj)
-    }
-  }, [searchBook])
+    getSearchedBook(searchObj)
+  }, [searchBook]);
 
+
+  const handleClick = (e) => {
+    const dbRef = firebase.database().ref();
+    dbRef.push(e);
+  }
+  const handleRemove = (e) => {
+    const dbRef = firebase.database().ref();
+    dbRef.child(e).remove();
+    console.log(e);
+  }
   return (
     <section className='search-container wrapper'>
       {searchResult.map((bookResult) => {
-        console.log(bookResult)
+        // console.log(bookResult);
         return (
-          <div className='book'>
+          <div className='book' key={bookResult.id}>
             <div className='image-container'>
               <img
                 src={bookResult.volumeInfo.imageLinks.thumbnail}
@@ -72,6 +91,8 @@ function Search(props) {
             <p>{bookResult.volumeInfo.authors}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p>
+            <button onClick={() => { handleClick(bookResult) }}>Add to List!</button>
+            <button onClick={() => { handleRemove(bookResult.id) }}>remove from List!</button>
           </div>
         )
       })}
