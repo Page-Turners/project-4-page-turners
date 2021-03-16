@@ -72,8 +72,8 @@ function Search(props) {
       const bookHold = [];
       //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
       for (let bookKey in bookData) {
-        console.log(bookKey);
-        console.log(bookData);
+        //console.log(bookKey);
+        //console.log(bookData);
         bookHold.push({
           uniqueKey: bookKey,
           bookObj: bookData[bookKey]
@@ -90,15 +90,22 @@ function Search(props) {
     dbRef.push(e);
   }
 
-  const handleRemove = (event) => {
+
+  const handleRemove = (bookId) => {
     const dbRef = firebase.database().ref();
-    dbRef.child(event).remove();
-    console.log(event.id);
+    const copyOfAllBooks = [...booksArray];
+    const bookInfo = copyOfAllBooks.filter((book) => {
+      console.log(book.bookObj.id);
+      return (
+        book.bookObj.id === bookId ? dbRef.child(book.uniqueKey).remove() : null
+      )
+    })
+    //console.log(copyOfAllBooks);
   }
 
   return (
     <section className='search-container wrapper'>
-      {searchResult.map((bookResult) => {
+      { searchResult.map((bookResult) => {
         // console.log(bookResult);
         return (
           <div className='book' key={bookResult.id}>
@@ -115,7 +122,7 @@ function Search(props) {
             <p>{bookResult.volumeInfo.averageRating}</p>
             <button onClick={() => handleClick(bookResult)}>Add to List!</button>
             <button onClick={() => {
-              handleRemove(bookResult.uniqueKey)
+              handleRemove(bookResult.id)
             }}>remove from List!</button>
           </div>
         )

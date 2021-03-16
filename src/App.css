@@ -312,3 +312,17 @@ h3,
 h1 {
   font-family: 'Maitree', serif;
 }
+
+.bookMark {
+  font-size: 30px;
+  color:aqua;
+}
+.iconBtn {
+  position: absolute;
+  top:0;
+  right:0;
+}
+button {
+  outline: none;
+  
+}

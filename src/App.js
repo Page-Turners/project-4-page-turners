@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import './App.css'
 import Search from './Search';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
 
 function App() {
   // books is an array
@@ -27,11 +26,7 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>Page Turner App</h1>
-        <button className="iconBtn">
-          <FontAwesomeIcon icon={faBookmark} /></button>
-      </header>
+      <Header />
       <section className='form-field'>
         {error ? <div> Enter a Valid value </div> :
           <form action='' onSubmit={handleSubmit}>
