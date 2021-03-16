@@ -12,7 +12,7 @@ const ReadingList = (props) => {
           return (
             <Fragment key={index}>
               <div className='book'>
-                <div className='image-container'>
+                <div className='reading-list-container'>
                   <img
                     src={bookData.volumeInfo.imageLinks.thumbnail} alt={bookData.volumeInfo.title}
 

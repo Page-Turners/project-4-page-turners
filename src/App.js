@@ -1,8 +1,13 @@
 // import firebase from './firebase.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css'
+import firebase from './firebase.js';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import Search from './Search';
 import Header from './Header';
+import ReadingList from './ReadingList';
 
 function App() {
   // books is an array
@@ -14,6 +19,8 @@ function App() {
   const [error, setError] = useState(false);
   //Loading state
   const [loading, setLoading] = useState(false);
+  //firebase data
+  const [booksArray, setBooksArray] = useState([]);
   //   handles submit on searchbar
   const handleSubmit = (event) => {
     const selectedRadio = document.querySelector('input[type ="radio"]:checked')
@@ -24,8 +31,32 @@ function App() {
     setSearchType(selectedRadio)
   }
 
+useEffect(() => {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (data) => {
+      // save the database object within a variable
+      const bookData = data.val();
+      //create a variable equal to an empty array
+      const bookHold = [];
+      //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
+      for (let bookKey in bookData) {
+        //console.log(bookKey);
+        //console.log(bookData);
+        bookHold.push({
+          uniqueKey: bookKey,
+          bookObj: bookData[bookKey], 
+          hasRead: false
+
+        });
+        setBooksArray(bookHold)
+        console.log(bookHold);
+      }
+    });
+  }, []);
+ 
   return (
-    <>
+    <Router>
+    {/* <Route exact path="/" exact component={Header} /> */}
       <Header />
       <section className='form-field'>
         {error ? <div> Enter a Valid value </div> :
@@ -59,18 +90,21 @@ function App() {
       </section>
 
       <main>
-      <Search
+       <Search
         type={searchType}
         text={result}
         error={error}
         setError={setError}
         loading={loading}
         setLoading={setLoading}
+        searchBook={booksArray}
       />
+      
 
       </main>
-      
-    </>
+      {/* <Route path="/readinglist" exact component={ReadingList(booksArray)} />  */}
+      <Route path="/readinglist" exact render={() => <ReadingList booksArray={booksArray} />} />
+    </Router>
   )
 }
 

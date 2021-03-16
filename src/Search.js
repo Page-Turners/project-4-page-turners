@@ -7,8 +7,8 @@ function Search(props) {
   const [searchResult, setSearchResult] = useState([]);
   const [booksArray, setBooksArray] = useState([]);
 
-  const { error, setError, loading, setLoading } = props;
-  const searchBook = props
+  const { error, setError, loading, setLoading, searchBook} = props;
+  console.log(searchBook)
   const searchObj = {}
 
   searchObj.userSearch = searchBook.text
@@ -26,8 +26,9 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: searchBook.userSearch,
-            inauthor: searchBook.userSearch
+            q: `${searchBook.userSearch} inauthor:`,
+            // inauthor: searchBook.userSearch
+          
             // maxResults: 40
           },
         }).then((res) => {
@@ -48,8 +49,8 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: searchBook.userSearch,
-            intitle: searchBook.userSearch,
+            q:`${searchBook.userSearch} intitle:`, 
+            
           },
         }).then((res) => {
           console.log(res.data.items)
@@ -78,7 +79,6 @@ function Search(props) {
           uniqueKey: bookKey,
           bookObj: bookData[bookKey]
         });
-        console.log(bookHold);
       }
       setBooksArray(bookHold);
     })
@@ -91,6 +91,18 @@ function Search(props) {
 
   }
 
+  const checkDuplicate = function(bookToBeAdded) {
+    let hasDuplicate = false;
+    booksArray.forEach((book)=>{
+      if (book.bookObj.id === bookToBeAdded.id) {
+        hasDuplicate = true;
+      } 
+    })
+    if (! hasDuplicate) {
+      handleClick(bookToBeAdded);
+
+    }
+  }
 
   const handleRemove = (bookId) => {
     const dbRef = firebase.database().ref();
@@ -103,6 +115,8 @@ function Search(props) {
     })
     //console.log(copyOfAllBooks);
   }
+
+
 
   return (
     <section className='search-container wrapper'>
@@ -118,10 +132,10 @@ function Search(props) {
             </div>
             <h3>{bookResult.volumeInfo.title}</h3>
             <h4>{bookResult.volumeInfo.subtitle}</h4>
-            <p>{bookResult.volumeInfo.authors}</p>
+            <p>{(bookResult.volumeInfo.authors).join(", ")}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p>
-            <button onClick={() => handleClick(bookResult)}>Add to List!</button>
+            <button onClick={() => checkDuplicate(bookResult)}>Add to List!</button>
             <button onClick={() => {
               handleRemove(bookResult.id)
             }}>remove from List!</button>

@@ -239,9 +239,9 @@ html {
   font-size: 62.5%;
 }
 
-/* * {
+* {
   border: 1px black solid;
-} */
+}
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -292,6 +292,7 @@ form {
   width: 40%;
   height: 35px;
   font-size: 20px;
+  
 }
 
 ::placeholder {
