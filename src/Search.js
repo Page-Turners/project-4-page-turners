@@ -117,7 +117,7 @@ function Search(props) {
               />
             </div>
             <h3>{bookResult.volumeInfo.title}</h3>
-            <p>{bookResult.volumeInfo.subtitle}</p>
+            <h4>{bookResult.volumeInfo.subtitle}</h4>
             <p>{bookResult.volumeInfo.authors}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p>

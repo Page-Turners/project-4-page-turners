@@ -239,9 +239,9 @@ html {
   font-size: 62.5%;
 }
 
-* {
+/* * {
   border: 1px black solid;
-}
+} */
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -266,6 +266,10 @@ header {
 h1 {
   font-size: 6rem;
 }
+h3,
+h1 {
+  font-family: 'Maitree', serif;
+}
 
 /* Form Field */
 input,
@@ -287,6 +291,7 @@ form {
 .search-bar {
   width: 40%;
   height: 35px;
+  font-size: 20px;
 }
 
 ::placeholder {
@@ -309,6 +314,7 @@ input[type='radio'] {
   font-family: 'Maitree', serif;
   background-color:#ACA9BB;
   border: 0 none;
+  font-size: 1.5rem;
 }
 
 /* Grid of Books */
@@ -326,6 +332,7 @@ main {
 }
 
 .book {
+  display: grid;
   justify-content: center;
   text-align: center;
 }
@@ -336,13 +343,14 @@ main {
 
 .book img {
   height: 100%;
+  
+}
+
+h3 {
+  font-size: 1.8rem;
 }
 
 
-h3,
-h1 {
-  font-family: 'Maitree', serif;
-}
 
 .bookMark {
   font-size: 30px;
