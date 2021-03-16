@@ -31,9 +31,12 @@ function App() {
         {error ? <div> Enter a Valid value </div> :
           <form action='' onSubmit={handleSubmit}>
             <label htmlFor='bookSearch'></label>
-            <input type='search' id='bookSearch' placeholder='Search Here...' required />
+            <input 
+            type='search' 
+            className="search-bar"
+            id='bookSearch' placeholder='Search Here...' required />
             <fieldset>
-              <label htmlFor='author'>Author</label>
+              <label className="radio-label" htmlFor='author'>Author</label>
               <input
                 type='radio'
                 id='author'
@@ -41,7 +44,7 @@ function App() {
                 name='searchType'
               />
 
-              <label htmlFor='title'>Title</label>
+              <label className="radio-label" htmlFor='title'>Title</label>
               <input
                 type='radio'
                 id='title'
@@ -49,12 +52,13 @@ function App() {
                 name='searchType'
               />
             </fieldset>
-            <button>Find Me A Book! </button>
+            <button className="search-button">Find Me A Book! </button>
           </form>
         }
         {loading && <div>fetching books for "<strong>{searchType}</strong>"</div>}
       </section>
 
+      <main>
       <Search
         type={searchType}
         text={result}
@@ -63,6 +67,9 @@ function App() {
         loading={loading}
         setLoading={setLoading}
       />
+
+      </main>
+      
     </>
   )
 }

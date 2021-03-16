@@ -240,7 +240,7 @@ html {
 }
 
 * {
-  border: 1px red solid;
+  border: 1px black solid;
 }
 
 body {
@@ -259,6 +259,7 @@ header {
   display: grid;
   justify-content: center;
   text-align: center;
+  background-color:#ACA9BB;
   /* height: 10vh; */
 }
 
@@ -274,7 +275,8 @@ fieldset {
 }
 
 .form-field {
-  height: 15vh;
+  height: auto;
+  background-color: #CBE8EC ;
 }
 
 form {
@@ -282,31 +284,60 @@ form {
   text-align: center;
 }
 
+.search-bar {
+  width: 40%;
+  height: 35px;
+}
+
+::placeholder {
+  font-size: 20px;
+  
+}
+
 input[type='radio'] {
   padding: 10px;
   margin: 10px;
 }
 
+.radio-label {
+  font-size: 2.5rem;
+}
+
+.search-button {
+  width: 120px;
+  height: 50px;
+  font-family: 'Maitree', serif;
+  background-color:#ACA9BB;
+  border: 0 none;
+}
+
 /* Grid of Books */
+main {
+  background-color: #FBDEBE ;
+}
+
 .search-container {
   display: grid;
   gap: 4rem;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+  padding: 5% 0;
+  
+  
 }
 
 .book {
   justify-content: center;
   text-align: center;
 }
+.image-container {
+  height: 200px;
+  width: 200px;
+}
 
 .book img {
   height: 100%;
 }
 
-.image-container {
-  height: 200px;
-  width: 200px;
-}
 
 h3,
 h1 {
@@ -315,7 +346,7 @@ h1 {
 
 .bookMark {
   font-size: 30px;
-  color:aqua;
+  color:#CBE8EC;
 }
 .iconBtn {
   position: absolute;

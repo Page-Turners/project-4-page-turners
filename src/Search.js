@@ -27,8 +27,8 @@ function Search(props) {
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
             q: searchBook.userSearch,
-            inauthor: searchBook.userSearch,
-            maxResults: 40
+            inauthor: searchBook.userSearch
+            // maxResults: 40
           },
         }).then((res) => {
           // console.log(res.data.items)
@@ -88,6 +88,7 @@ function Search(props) {
   const handleClick = (e) => {
     const dbRef = firebase.database().ref();
     dbRef.push(e);
+
   }
 
 
