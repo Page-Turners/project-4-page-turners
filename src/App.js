@@ -47,13 +47,11 @@ function App() {
   return (
     <Router>
       <Header />
-
-      
-      <Route path='/'>
-        <FormField/>
+      <Route path='/' exact >
+        <FormField />
         {/* component ={FormField} */}
 
-       </Route>
+      </Route>
 
 
       <Route

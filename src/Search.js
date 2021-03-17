@@ -18,68 +18,33 @@ function Search(props) {
 
   const getSearchedBook = (type, text) => {
     console.log(type, text)
-    // let queryText =
+    let query = ''
 
     if (type === 'author') {
-      // setLoading(true)
-      // setError(false)
-      // console.log('author found');
-      console.log('calling the api')
-      try {
-        axios({
-          url: `https://www.googleapis.com/books/v1/volumes?`,
-          method: 'GET',
-          dataResponse: 'json',
-          params: {
-            key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: `inauthor:${text}`,
-            // inauthor: searchBook.userSearch
+      query = `inauthor:${text}`
+    } else if (type === "title") {
+      query = `intitle:${text}`
+    }
 
-            // maxResults: 40
-          },
-        }).then((res) => {
-          console.log(res.data.items)
-          setSearchResult(res.data.items)
-        })
-      } catch (error) {
-        console.log(error)
-        // setError(true)
-      }
-      // setLoading(false)
-    } else if (type === 'title') {
-      // setLoading(true)
-      // setError(false)
-      console.log('calling the api')
-      try {
-        axios({
-          url: `https://www.googleapis.com/books/v1/volumes?`,
-          method: 'GET',
-          dataResponse: 'json',
-          params: {
-            key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: `intitle:${text}`,
-          },
-        }).then((res) => {
-          console.log(res.data.items)
-          setSearchResult(res.data.items)
-        })
-        console.log('title found')
-      } catch (error) {
-        // setError(true)
-        console.log(error)
-      }
-      // setLoading(false)
+    console.log('calling the api')
+    try {
+      axios({
+        url: `https://www.googleapis.com/books/v1/volumes?`,
+        method: 'GET',
+        dataResponse: 'json',
+        params: {
+          key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
+          q: query,
+          // maxResults: 40
+        },
+      }).then((res) => {
+        // console.log(res.data.items)
+        setSearchResult(res.data.items)
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
-
-  // calling the function
-  //
-
-  // useEffect(() => {
-  //   // return () => {
-  //   getSearchedBook(props.type, props.text)
-  //   // }
-  // }, [])
 
   useEffect(() => {
     const dbRef = firebase.database().ref()
@@ -108,6 +73,7 @@ function Search(props) {
   const handleClick = (e) => {
     const dbRef = firebase.database().ref()
     dbRef.push(e)
+    console.log(e);
   }
 
   // Checking for duplicate books
@@ -140,18 +106,18 @@ function Search(props) {
   return (
     <section className='search-container wrapper'>
       {searchResult.map((bookResult) => {
-        console.log(bookResult);
+        // console.log(bookResult);
         return (
           <div className='book' key={bookResult.id}>
             <div className='image-container'>
               {
-              (bookResult.volumeInfo.imageLinks) ? 
-                <img
-                  src={bookResult.volumeInfo.imageLinks.thumbnail}
-                  alt={bookResult.volumeInfo.title}
-                />
-               : 
-              <h3>No image available</h3>
+                (bookResult.volumeInfo.imageLinks) ?
+                  <img
+                    src={bookResult.volumeInfo.imageLinks.thumbnail}
+                    alt={bookResult.volumeInfo.title}
+                  />
+                  :
+                  <h3>No image available</h3>
               }
             </div>
 

@@ -13,7 +13,7 @@ const FormField = () => {
 
     const [formBooksArray, setFormBooksArray] = useState([])
 
-   
+
     const handleUserInput = (event) => {
         const selectedText = event.target.value
         console.log('userinput!')
@@ -39,61 +39,63 @@ const FormField = () => {
 
 
     return (
-    <div className = "search-container">
-        <section className='form-field'>
+        <>
+            <div className="search-container">
+                <section className='form-field'>
 
-            <form action='' onSubmit={handleSubmit}>
-                <label htmlFor='bookSearch'></label>
-                <input
-                    type='search'
-                    className='search-bar'
-                    id='bookSearch'
-                    placeholder='Search Here...'
-                    value={userInput}
-                    onChange={handleUserInput}
-                    required
-                />
-                <fieldset>
-                    <label className='radio-label' htmlFor='author'>
-                        Author
+                    <form action='' onSubmit={handleSubmit}>
+                        <label htmlFor='bookSearch'>Search for book</label>
+                        <input
+                            type='search'
+                            className='search-bar'
+                            id='bookSearch'
+                            placeholder='Search Here...'
+                            value={userInput}
+                            onChange={handleUserInput}
+                            required
+                        />
+                        <fieldset>
+                            <label className='radio-label' htmlFor='author'>
+                                Author
               </label>
-                    <input
-                        type='radio'
-                        id='author'
-                        value='author'
-                        name='searchType'
-                        onChange={handleRadioInput}
-                        checked={radioInput === 'author'}
-                    />
+                            <input
+                                type='radio'
+                                id='author'
+                                value='author'
+                                name='searchType'
+                                onChange={handleRadioInput}
+                                checked={radioInput === 'author'}
+                            />
 
-                    <label className='radio-label' htmlFor='title'>
-                        Title
+                            <label className='radio-label' htmlFor='title'>
+                                Title
               </label>
-                    <input
-                        type='radio'
-                        id='title'
-                        value='title'
-                        name='searchType'
-                        onChange={handleRadioInput}
-                        checked={radioInput === 'title'}
-                    />
-                </fieldset>
-                <button className='search-button'>Find Me A Book! </button>
-            </form>
+                            <input
+                                type='radio'
+                                id='title'
+                                value='title'
+                                name='searchType'
+                                onChange={handleRadioInput}
+                                checked={radioInput === 'title'}
+                            />
+                        </fieldset>
+                        <button className='search-button'>Find Me A Book! </button>
+                    </form>
 
-        </section>
-      <section>
-            {searchType && result ? (
-                <Search
-                    type={searchType}
-                    text={result}
-                    searchBook={formBooksArray}
-                />
-            ) : null}
-        
-      </section>
-      </div>
-        
+                </section>
+
+            </div>
+            <section>
+                {searchType && result ? (
+                    <Search
+                        type={searchType}
+                        text={result}
+                        searchBook={formBooksArray}
+                    />
+                ) : null}
+
+            </section>
+        </>
     )
 }
 
