@@ -1,24 +1,30 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react';//import firebase into our component
-import firebase from './firebase.js';
-import ReadingList from './ReadingList';
+import { useEffect, useState } from 'react' //import firebase into our component
+import firebase from './firebase.js'
+import ReadingList from './ReadingList'
 
 function Search(props) {
-  const [searchResult, setSearchResult] = useState([]);
-  const [booksArray, setBooksArray] = useState([]);
+  const [searchResult, setSearchResult] = useState([])
+  const [booksArray, setBooksArray] = useState([])
 
-  const { error, setError, loading, setLoading, searchBook} = props;
+  const { error, setError, loading, setLoading, searchBook, text, type } = props
 
-  const searchObj = {}
+  console.log(props.text, props.type)
 
-  searchObj.userSearch = searchBook.text
-  searchObj.userChoice = searchBook.type
+  // const searchObj = {}
 
-  const getSearchedBook = (searchBook) => {
-    if (searchBook.userChoice === 'author') {
-      setLoading(true);
-      setError(false);
+  // searchObj.userSearch = searchBook.text
+  // searchObj.userChoice = searchBook.type
+
+  const getSearchedBook = (type, text) => {
+    console.log(type, text)
+    // let queryText =
+
+    if (type === 'author') {
+      // setLoading(true)
+      // setError(false)
       // console.log('author found');
+      console.log('calling the api')
       try {
         axios({
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -26,22 +32,24 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: `inauthor:${searchBook.userSearch}`,
+            q: `inauthor:${text}`,
             // inauthor: searchBook.userSearch
-          
+
             // maxResults: 40
           },
         }).then((res) => {
-          // console.log(res.data.items)
+          console.log(res.data.items)
           setSearchResult(res.data.items)
         })
       } catch (error) {
-        setError(true);
+        console.log(error)
+        // setError(true)
       }
-      setLoading(false)
-    } else if (searchBook.userChoice === 'title') {
-      setLoading(true);
-      setError(false);
+      // setLoading(false)
+    } else if (type === 'title') {
+      // setLoading(true)
+      // setError(false)
+      console.log('calling the api')
       try {
         axios({
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -49,8 +57,7 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: `intitle:${searchBook.userSearch}`,
-            
+            q: `intitle:${text}`,
           },
         }).then((res) => {
           console.log(res.data.items)
@@ -58,69 +65,80 @@ function Search(props) {
         })
         console.log('title found')
       } catch (error) {
-        setError(true);
+        // setError(true)
+        console.log(error)
       }
-      setLoading(false);
+      // setLoading(false)
     }
   }
 
+  // calling the function
+  //
+
   useEffect(() => {
-    const dbRef = firebase.database().ref();
+    return () => {
+      getSearchedBook(props.type, props.text)
+    }
+  }, [])
+
+  useEffect(() => {
+    const dbRef = firebase.database().ref()
     dbRef.on('value', (data) => {
       // save the database object within a variable
-      const bookData = data.val();
+      const bookData = data.val()
       //create a variable equal to an empty array
-      const bookHold = [];
+      const bookHold = []
       //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
       for (let bookKey in bookData) {
         //console.log(bookKey);
         //console.log(bookData);
         bookHold.push({
           uniqueKey: bookKey,
-          bookObj: bookData[bookKey]
-        });
+          bookObj: bookData[bookKey],
+        })
       }
-      setBooksArray(bookHold);
+      setBooksArray(bookHold)
     })
-    getSearchedBook(searchObj);
-  }, [searchBook])
+    // getSearchedBook(searchObj)
+  }, [booksArray])
+
+  // Adding things to FireBase
 
   const handleClick = (e) => {
-    const dbRef = firebase.database().ref();
-    dbRef.push(e);
-
+    const dbRef = firebase.database().ref()
+    dbRef.push(e)
   }
 
-  const checkDuplicate = function(bookToBeAdded) {
-    let hasDuplicate = false;
-    booksArray.forEach((book)=>{
-      if (book.bookObj.id === bookToBeAdded.id) {
-        hasDuplicate = true;
-      } 
-    })
-    if (! hasDuplicate) {
-      handleClick(bookToBeAdded);
+  // Checking for duplicate books
 
+  const checkDuplicate = function (bookToBeAdded) {
+    let hasDuplicate = false
+    booksArray.forEach((book) => {
+      if (book.bookObj.id === bookToBeAdded.id) {
+        hasDuplicate = true
+      }
+    })
+    if (!hasDuplicate) {
+      handleClick(bookToBeAdded)
     }
   }
 
   const handleRemove = (bookId) => {
-    const dbRef = firebase.database().ref();
-    const copyOfAllBooks = [...booksArray];
+    const dbRef = firebase.database().ref()
+    const copyOfAllBooks = [...booksArray]
     const bookInfo = copyOfAllBooks.filter((book) => {
-      console.log(book.bookObj.id);
-      return (
-        book.bookObj.id === bookId ? dbRef.child(book.uniqueKey).remove() : null
-      )
+      console.log(book.bookObj.id)
+      return book.bookObj.id === bookId
+        ? dbRef.child(book.uniqueKey).remove()
+        : null
     })
     //console.log(copyOfAllBooks);
   }
-
-
-
+  console.log(searchResult)
+  console.log('fdsfjsdf')
   return (
     <section className='search-container wrapper'>
-      { searchResult.map((bookResult) => {
+      {searchResult.map((bookResult) => {
         // console.log(bookResult);
         return (
           <div className='book' key={bookResult.id}>
@@ -132,19 +150,24 @@ function Search(props) {
             </div>
             <h3>{bookResult.volumeInfo.title}</h3>
             <h4>{bookResult.volumeInfo.subtitle}</h4>
-            <p>{(bookResult.volumeInfo.authors).join(", ")}</p>
+            <p>{bookResult.volumeInfo.authors.join(', ')}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p>
-            <button onClick={() => checkDuplicate(bookResult)}>Add to List!</button>
-            <button onClick={() => {
-              handleRemove(bookResult.id)
-            }}>remove from List!</button>
+            <button onClick={() => checkDuplicate(bookResult)}>
+              Add to List!
+            </button>
+            <button
+              onClick={() => {
+                handleRemove(bookResult.id)
+              }}
+            >
+              remove from List!
+            </button>
           </div>
         )
       })}
       {/* <ReadingList booksArray={booksArray} /> */}
     </section>
-
   )
 }
 
