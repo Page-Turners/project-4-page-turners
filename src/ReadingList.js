@@ -1,12 +1,41 @@
+import { useState } from 'react';
 //Local copy of firebase to be printed
 import React, { Fragment } from 'react';
 const ReadingList = (props) => {
-  const { booksArray } = props;
-  // console.log(booksArray);
+  const [booksCompleted, setBooksCompleted] = useState([]);
+  const { readingListArray } = props;
+
+  console.log("READINGLIST START");
+  console.log(readingListArray);
+
+  const handleComplete = (completedBook) => {
+    console.log(completedBook);
+
+    // if (completedBook === readingListArray.bookObj.id) {
+    const bookFound = readingListArray.filter((book) => {
+      return book.bookObj.id === completedBook
+        ?
+        book.bookObj.hasRead = true
+        : null
+    });
+  }
+
+  const sortBooks = () => {
+    const bookFound = readingListArray.filter((book) => {
+      return book.bookObj.hasRead === true
+        ?
+        // setBooksCompleted(book)
+        <h1>has found</h1>
+        : null
+    });
+
+  }
+
   return (
+
     <ul className="bookShelf">
       {
-        booksArray.map((book, index) => {
+        readingListArray.map((book, index) => {
           const bookData = book.bookObj;
           // console.log(bookData);
           return (
@@ -22,18 +51,20 @@ const ReadingList = (props) => {
                 <p>{bookData.volumeInfo.authors}</p>
                 <p>{bookData.volumeInfo.categories}</p>
                 <p>{bookData.volumeInfo.averageRating}</p>
-                {/* <button onClick={() => handleClick(bookResult)}>Add to List!</button>
-                <button onClick={() => {
+
+                <button onClick={() => handleComplete(bookData.id)}>Complete!</button>
+                {/* <button onClick={() => {
                   handleRemove(bookResult.id)
-                }}>remove from List!</button> */}
+                }}>remove from List!</button>  */}
               </div>
+              {sortBooks()}
             </Fragment>
           )
 
         })
       }
-    </ul>
 
+    </ul>
   )
 }
 export default ReadingList;
