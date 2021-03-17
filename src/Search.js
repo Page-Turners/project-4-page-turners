@@ -1,23 +1,20 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react';//import firebase into our component
+import { useEffect, useState } from 'react';
+//import firebase into our component
 import firebase from './firebase.js';
 import ReadingList from './ReadingList';
 
 function Search(props) {
   const [searchResult, setSearchResult] = useState([]);
   const [booksArray, setBooksArray] = useState([]);
-
-  const { error, setError, loading, setLoading, searchBook} = props;
-
+  const { searchBook } = props;
+  console.log(searchBook);
   const searchObj = {}
-
   searchObj.userSearch = searchBook.text
   searchObj.userChoice = searchBook.type
 
   const getSearchedBook = (searchBook) => {
     if (searchBook.userChoice === 'author') {
-      setLoading(true);
-      setError(false);
       // console.log('author found');
       try {
         axios({
@@ -26,9 +23,8 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: ` inauthor:${searchBook.userSearch}`,
+            q: `inauthor:${searchBook.userInput}`,
             // inauthor: searchBook.userSearch
-          
             // maxResults: 40
           },
         }).then((res) => {
@@ -36,12 +32,9 @@ function Search(props) {
           setSearchResult(res.data.items)
         })
       } catch (error) {
-        setError(true);
+        console.log(error);
       }
-      setLoading(false)
     } else if (searchBook.userChoice === 'title') {
-      setLoading(true);
-      setError(false);
       try {
         axios({
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -49,8 +42,8 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q:`${searchBook.userSearch} intitle:`, 
-            
+            q: ` intitle:${searchBook.userSearch}`,
+
           },
         }).then((res) => {
           console.log(res.data.items)
@@ -58,9 +51,8 @@ function Search(props) {
         })
         console.log('title found')
       } catch (error) {
-        setError(true);
+        console.log(error);
       }
-      setLoading(false);
     }
   }
 
@@ -91,14 +83,14 @@ function Search(props) {
 
   }
 
-  const checkDuplicate = function(bookToBeAdded) {
+  const checkDuplicate = function (bookToBeAdded) {
     let hasDuplicate = false;
-    booksArray.forEach((book)=>{
+    booksArray.forEach((book) => {
       if (book.bookObj.id === bookToBeAdded.id) {
         hasDuplicate = true;
-      } 
+      }
     })
-    if (! hasDuplicate) {
+    if (!hasDuplicate) {
       handleClick(bookToBeAdded);
 
     }

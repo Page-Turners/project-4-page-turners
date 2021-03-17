@@ -8,14 +8,13 @@ const ReadingList = (props) => {
       {
         booksArray.map((book, index) => {
           const bookData = book.bookObj;
-          console.log(bookData);
+          // console.log(bookData);
           return (
             <Fragment key={index}>
               <div className='book'>
                 <div className='reading-list-container'>
                   <img
                     src={bookData.volumeInfo.imageLinks.thumbnail} alt={bookData.volumeInfo.title}
-
                   />
                 </div>
                 <h3>{bookData.volumeInfo.title}</h3>
