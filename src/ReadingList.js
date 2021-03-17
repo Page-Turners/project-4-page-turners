@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 const ReadingList = (props) => {
   const { booksArray } = props;
-  console.log(booksArray);
+  // console.log(booksArray);
   return (
     <ul className="bookShelf">
       {
