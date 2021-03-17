@@ -75,14 +75,15 @@ function Search(props) {
   // calling the function
   //
 
-  useEffect(() => {
-    return () => {
-      getSearchedBook(props.type, props.text)
-    }
-  }, [])
+  // useEffect(() => {
+  //   // return () => {
+  //   getSearchedBook(props.type, props.text)
+  //   // }
+  // }, [])
 
   useEffect(() => {
     const dbRef = firebase.database().ref()
+    getSearchedBook(props.type, props.text)
     dbRef.on('value', (data) => {
       // save the database object within a variable
       const bookData = data.val()
@@ -100,7 +101,7 @@ function Search(props) {
       setBooksArray(bookHold)
     })
     // getSearchedBook(searchObj)
-  }, [booksArray])
+  }, [])
 
   // Adding things to FireBase
 
@@ -134,8 +135,8 @@ function Search(props) {
     })
     //console.log(copyOfAllBooks);
   }
-  console.log(searchResult)
-  console.log('fdsfjsdf')
+  // console.log(searchResult)
+  // console.log('fdsfjsdf')
   return (
     <section className='search-container wrapper'>
       {searchResult.map((bookResult) => {
@@ -143,16 +144,52 @@ function Search(props) {
         return (
           <div className='book' key={bookResult.id}>
             <div className='image-container'>
-              <img
-                src={bookResult.volumeInfo.imageLinks.thumbnail}
-                alt={bookResult.volumeInfo.title}
-              />
+              {bookResult.volumeInfo.imageLinks.thumbnail ? (
+                <img
+                  src={bookResult.volumeInfo.imageLinks.thumbnail}
+                  alt={bookResult.volumeInfo.title}
+                />
+              ) : (
+                <h3>No image available</h3>
+              )}
             </div>
-            <h3>{bookResult.volumeInfo.title}</h3>
-            <h4>{bookResult.volumeInfo.subtitle}</h4>
+
+            {/* book details */}
+            {bookResult.volumeInfo.title ? (
+              <h3>{bookResult.volumeInfo.title}</h3>
+            ) : (
+              <h3>No title available</h3>
+            )}
+
+            {bookResult.volumeInfo.subtitle ? (
+              <h3>{bookResult.volumeInfo.subtitle}</h3>
+            ) : (
+              <h3>---</h3>
+            )}
+
+            {bookResult.volumeInfo.authors.join(', ') ? (
+              <p>{bookResult.volumeInfo.authors.join(', ')}</p>
+            ) : (
+              <p>---</p>
+            )}
+
+            {bookResult.volumeInfo.categories ? (
+              <p>{bookResult.volumeInfo.categories}</p>
+            ) : (
+              <p>---</p>
+            )}
+
+            {bookResult.volumeInfo.averageRating ? (
+              <p>{bookResult.volumeInfo.averageRating}</p>
+            ) : (
+              <p>---</p>
+            )}
+
+            {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
             <p>{bookResult.volumeInfo.authors.join(', ')}</p>
             <p>{bookResult.volumeInfo.categories}</p>
-            <p>{bookResult.volumeInfo.averageRating}</p>
+            <p>{bookResult.volumeInfo.averageRating}</p> */}
+
             <button onClick={() => checkDuplicate(bookResult)}>
               Add to List!
             </button>

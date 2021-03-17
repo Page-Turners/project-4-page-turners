@@ -138,10 +138,11 @@ function App() {
         ) : null}
       </main>
       {/* <Route path="/readinglist" exact component={ReadingList(booksArray)} />  */}
-      <Route
+
+      {/* <Route
         path='/readinglist'
         render={(props) => <ReadingList {...props} booksArray={booksArray} />}
-      />
+      /> */}
 
       {/* <Route
         path='/dashboard'
@@ -149,6 +150,11 @@ function App() {
           <Dashboard {...props} isAuthed={true} />
         )}
       /> */}
+
+      <Route
+        path='/readinglist'
+        render={() => <ReadingList booksArray={booksArray} />}
+      />
     </Router>
   )
 }
