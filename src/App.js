@@ -27,9 +27,9 @@ function App() {
 
   //   handles submit on searchbar
   const handleSubmit = (event) => {
-    const selectedRadio = document.querySelector('input[type ="radio"]:checked')
-      .id
-    const selectedText = document.getElementById('bookSearch').value
+    // const selectedRadio = document.querySelector('input[type ="radio"]:checked')
+    //   .id
+    // const selectedText = document.getElementById('bookSearch').value
     event.preventDefault()
     setResult(userInput)
     setSearchType(radioInput)
@@ -37,11 +37,13 @@ function App() {
 
   const handleUserInput = (event) => {
     const selectedText = event.target.value
+    console.log('userinput!')
     setUserInput(selectedText)
   }
 
   const handleRadioInput = (event) => {
     const selectedRadio = event.target.value 
+    console.log('radioinput!')
     setRadioInput(selectedRadio)
   }
 
@@ -64,15 +66,16 @@ useEffect(() => {
 
         });
         setBooksArray(bookHold)
-        console.log(bookHold);
+        // console.log(bookHold);
       }
     });
   }, []);
  
   return (
     <Router>
-    {/* <Route exact path="/" exact component={Header} /> */}
+    {/* <Route exact path="/header" exact component={Header} /> */}
       <Header />
+
       <section className='form-field'>
         {error ? <div> Enter a Valid value </div> :
           <form action='' onSubmit={handleSubmit}>
@@ -127,7 +130,21 @@ useEffect(() => {
 
       </main>
       {/* <Route path="/readinglist" exact component={ReadingList(booksArray)} />  */}
-      <Route path="/readinglist" exact render={() => <ReadingList booksArray={booksArray} />} />
+      <Route 
+      path="/readinglist"
+       render={(props) => (
+       <ReadingList {...props} booksArray={booksArray} />
+       )} 
+       />
+
+      {/* <Route
+        path='/dashboard'
+        render={(props) => (
+          <Dashboard {...props} isAuthed={true} />
+        )}
+      /> */}
+
+
     </Router>
   )
 }

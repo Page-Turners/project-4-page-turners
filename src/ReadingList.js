@@ -2,13 +2,13 @@
 import React, { Fragment } from 'react';
 const ReadingList = (props) => {
   const { booksArray } = props;
-  console.log(booksArray);
+  // console.log(booksArray);
   return (
     <ul className="bookShelf">
       {
         booksArray.map((book, index) => {
           const bookData = book.bookObj;
-          console.log(bookData);
+          // console.log(bookData);
           return (
             <Fragment key={index}>
               <div className='book'>

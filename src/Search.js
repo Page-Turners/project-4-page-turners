@@ -26,7 +26,7 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: ` inauthor:${searchBook.userSearch}`,
+            q: `inauthor:${searchBook.userSearch}`,
             // inauthor: searchBook.userSearch
           
             // maxResults: 40
@@ -49,7 +49,7 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q:`${searchBook.userSearch} intitle:`, 
+            q: `intitle:${searchBook.userSearch}`,
             
           },
         }).then((res) => {
@@ -142,7 +142,7 @@ function Search(props) {
           </div>
         )
       })}
-      <ReadingList booksArray={booksArray} />
+      {/* <ReadingList booksArray={booksArray} /> */}
     </section>
 
   )
