@@ -21,15 +21,30 @@ function App() {
   const [loading, setLoading] = useState(false);
   //firebase data
   const [booksArray, setBooksArray] = useState([]);
+
+  const [userInput, setUserInput] = useState('')
+  const [radioInput, setRadioInput] = useState('');
+
   //   handles submit on searchbar
   const handleSubmit = (event) => {
     const selectedRadio = document.querySelector('input[type ="radio"]:checked')
       .id
     const selectedText = document.getElementById('bookSearch').value
     event.preventDefault()
-    setResult(selectedText)
-    setSearchType(selectedRadio)
+    setResult(userInput)
+    setSearchType(radioInput)
   }
+
+  const handleUserInput = (event) => {
+    const selectedText = event.target.value
+    setUserInput(selectedText)
+  }
+
+  const handleRadioInput = (event) => {
+    const selectedRadio = event.target.value 
+    setRadioInput(selectedRadio)
+  }
+
 
 useEffect(() => {
     const dbRef = firebase.database().ref();
@@ -65,7 +80,11 @@ useEffect(() => {
             <input 
             type='search' 
             className="search-bar"
-            id='bookSearch' placeholder='Search Here...' required />
+            id='bookSearch' 
+            placeholder='Search Here...' 
+            value={userInput}
+            onChange={handleUserInput}
+            required />
             <fieldset>
               <label className="radio-label" htmlFor='author'>Author</label>
               <input
@@ -73,6 +92,8 @@ useEffect(() => {
                 id='author'
                 value='author'
                 name='searchType'
+                onChange={handleRadioInput}
+                checked={radioInput=== 'author'}
               />
 
               <label className="radio-label" htmlFor='title'>Title</label>
@@ -81,6 +102,9 @@ useEffect(() => {
                 id='title'
                 value='title'
                 name='searchType'
+
+                onChange={handleRadioInput}
+                checked={radioInput === 'title'}
               />
             </fieldset>
             <button className="search-button">Find Me A Book! </button>

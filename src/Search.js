@@ -7,7 +7,7 @@ function Search(props) {
   const [searchResult, setSearchResult] = useState([]);
   const [booksArray, setBooksArray] = useState([]);
 
-  const { error, setError, loading, setLoading, searchBooks} = props;
+  const { error, setError, loading, setLoading, searchBook} = props;
 
   const searchObj = {}
 
@@ -26,7 +26,7 @@ function Search(props) {
           dataResponse: 'json',
           params: {
             key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
-            q: `${searchBook.userSearch} inauthor:`,
+            q: ` inauthor:${searchBook.userSearch}`,
             // inauthor: searchBook.userSearch
           
             // maxResults: 40
