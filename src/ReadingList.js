@@ -1,12 +1,21 @@
 //Local copy of firebase to be printed
 import React, { Fragment } from 'react';
 const ReadingList = (props) => {
-  const { booksArray } = props;
-  // console.log(booksArray);
+  const { readingListArray } = props;
+
+  console.log("READINGLIST START");
+  console.log(readingListArray);
+
+  // const handleComplete = (completedBook) => {
+  //   console.log(completedBook);
+  // }
+
+
   return (
     <ul className="bookShelf">
       {
-        booksArray.map((book, index) => {
+        readingListArray.map((book, index) => {
+          console.log(index);
           const bookData = book.bookObj;
           // console.log(bookData);
           return (
@@ -23,10 +32,11 @@ const ReadingList = (props) => {
                 <p>{bookData.volumeInfo.authors}</p>
                 <p>{bookData.volumeInfo.categories}</p>
                 <p>{bookData.volumeInfo.averageRating}</p>
-                {/* <button onClick={() => handleClick(bookResult)}>Add to List!</button>
-                <button onClick={() => {
+                
+                {/* <button onClick={() => handleComplete(bookData.id)}>Complete!</button> */}
+                {/* <button onClick={() => {
                   handleRemove(bookResult.id)
-                }}>remove from List!</button> */}
+                }}>remove from List!</button>  */}
               </div>
             </Fragment>
           )

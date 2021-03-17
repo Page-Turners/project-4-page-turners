@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react' //import firebase into our component
 import firebase from './firebase.js'
-import ReadingList from './ReadingList'
+//import ReadingList from './ReadingList'
 
 function Search(props) {
   const [searchResult, setSearchResult] = useState([])
-  const [booksArray, setBooksArray] = useState([])
+  const [searchBooksArray, setSearchBooksArray] = useState([])
 
   const { error, setError, loading, setLoading, searchBook, text, type } = props
 
@@ -98,7 +98,7 @@ function Search(props) {
           bookObj: bookData[bookKey],
         })
       }
-      setBooksArray(bookHold)
+      setSearchBooksArray(bookHold)
     })
     // getSearchedBook(searchObj)
   }, [])
@@ -114,7 +114,7 @@ function Search(props) {
 
   const checkDuplicate = function (bookToBeAdded) {
     let hasDuplicate = false
-    booksArray.forEach((book) => {
+    searchBooksArray.forEach((book) => {
       if (book.bookObj.id === bookToBeAdded.id) {
         hasDuplicate = true
       }
@@ -126,7 +126,7 @@ function Search(props) {
 
   const handleRemove = (bookId) => {
     const dbRef = firebase.database().ref()
-    const copyOfAllBooks = [...booksArray]
+    const copyOfAllBooks = [...searchBooksArray]
     const bookInfo = copyOfAllBooks.filter((book) => {
       console.log(book.bookObj.id)
       return book.bookObj.id === bookId
@@ -140,18 +140,19 @@ function Search(props) {
   return (
     <section className='search-container wrapper'>
       {searchResult.map((bookResult) => {
-        // console.log(bookResult);
+        console.log(bookResult);
         return (
           <div className='book' key={bookResult.id}>
             <div className='image-container'>
-              {bookResult.volumeInfo.imageLinks.thumbnail ? (
+              {
+              (bookResult.volumeInfo.imageLinks) ? 
                 <img
                   src={bookResult.volumeInfo.imageLinks.thumbnail}
                   alt={bookResult.volumeInfo.title}
                 />
-              ) : (
-                <h3>No image available</h3>
-              )}
+               : 
+              <h3>No image available</h3>
+              }
             </div>
 
             {/* book details */}
