@@ -36,7 +36,6 @@ function App() {
         bookHold.push({
           uniqueKey: bookKey,
           bookObj: bookData[bookKey],
-          hasRead: false,
         })
         setBooksArray(bookHold)
         console.log(bookHold);

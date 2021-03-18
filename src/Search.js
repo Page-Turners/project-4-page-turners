@@ -71,9 +71,12 @@ function Search(props) {
   // Adding things to FireBase
 
   const handleClick = (e) => {
+    let totalBook = {}
+    totalBook = e;
+    totalBook.hasRead = false;
+
     const dbRef = firebase.database().ref()
-    dbRef.push(e)
-    console.log(e);
+    dbRef.push(totalBook)
   }
 
   // Checking for duplicate books
@@ -170,7 +173,7 @@ function Search(props) {
           </div>
         )
       })}
-      <ReadingList booksArray={booksArray} />
+      {/* <ReadingList booksArray={booksArray} /> */}
     </section>
   )
 }
