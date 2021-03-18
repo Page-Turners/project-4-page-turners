@@ -16,7 +16,8 @@ const ReadingList = (props) => {
     console.log(completedBook)
     let bookRef = firebase.database()
 
-    const bookFound = readingListArray.filter((book) => {
+    // const bookFound = 
+    readingListArray.filter((book) => {
       return book.bookObj.id === completedBook
         ? bookRef.ref(book.uniqueKey).update({ hasRead: true })
         : null
@@ -66,7 +67,8 @@ const ReadingList = (props) => {
   const handleRemove = (bookId) => {
     const dbRef = firebase.database().ref()
     const copyOfAllBooks = [...readingListArray]
-    const bookInfo = copyOfAllBooks.filter((book) => {
+    // const bookInfo = 
+    copyOfAllBooks.filter((book) => {
       console.log(book.bookObj.id)
       return book.bookObj.id === bookId
         ? dbRef.child(book.uniqueKey).remove()
@@ -107,7 +109,7 @@ const ReadingList = (props) => {
             {bookData.volumeInfo.subtitle ? (
               <h3>{bookData.volumeInfo.subtitle}</h3>
             ) : (
-              <h3></h3>
+              <p></p>
             )}
 
             {bookData.volumeInfo.authors.join(', ') ? (
@@ -170,7 +172,7 @@ const ReadingList = (props) => {
                 {completedBookData.volumeInfo.subtitle ? (
                   <h3>{completedBookData.volumeInfo.subtitle}</h3>
                 ) : (
-                  <h3></h3>
+                 <p></p>
                 )}
 
                 {completedBookData.volumeInfo.authors.join(', ') ? (

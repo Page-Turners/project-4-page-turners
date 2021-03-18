@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 // import Header from './Header'
 import FormField from './FormField'
-import Search from './Search'
 import ReadingList from './ReadingList'
 
 function App() {

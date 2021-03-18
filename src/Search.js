@@ -8,7 +8,7 @@ function Search(props) {
   const [searchResult, setSearchResult] = useState([])
   const [searchBooksArray, setSearchBooksArray] = useState([])
 
-  const { error, setError, loading, setLoading, searchBook, text, type } = props
+  const {  text, type } = props
 
   console.log(props.text, props.type)
 

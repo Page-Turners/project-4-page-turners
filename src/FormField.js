@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import React from 'react'
 import Search from './Search.js'
 
@@ -76,8 +76,7 @@ const FormField = () => {
                 {searchType && result ? (
                     <Search
                         type={searchType}
-                        text={result}
-                        searchBook={formBooksArray}
+                        text={result} 
                     />
                 ) : null}
 
