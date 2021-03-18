@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
-
 import Search from './Search.js'
 
-
 const FormField = () => {
+
     const [result, setResult] = useState('')
     const [searchType, setSearchType] = useState('')
-
     const [userInput, setUserInput] = useState('')
     const [radioInput, setRadioInput] = useState('')
-
     const [formBooksArray, setFormBooksArray] = useState([])
-
 
     const handleUserInput = (event) => {
         const selectedText = event.target.value
@@ -25,24 +21,17 @@ const FormField = () => {
         console.log('radioinput!')
         setRadioInput(selectedRadio)
     }
-
-
     //   handles submit on searchbar
     const handleSubmit = (event) => {
-        // const selectedRadio = document.querySelector('input[type ="radio"]:checked')
-        //   .id
-        // const selectedText = document.getElementById('bookSearch').value
         event.preventDefault()
         setResult(userInput)
         setSearchType(radioInput)
     }
 
-
     return (
         <>
-            <div className="search-container">
+            <div className="form-container">
                 <section className='form-field'>
-
                     <form action='' onSubmit={handleSubmit}>
                         <label htmlFor='bookSearch'>Search for book</label>
                         <input
@@ -81,9 +70,7 @@ const FormField = () => {
                         </fieldset>
                         <button className='search-button'>Find Me A Book! </button>
                     </form>
-
                 </section>
-
             </div>
             <section>
                 {searchType && result ? (
