@@ -40,11 +40,11 @@ const FormField = () => {
 
     return (
         <>
-            <div className="search-container">
+            {/* <div className="search-container"> */}
                 <section className='form-field'>
 
                     <form action='' onSubmit={handleSubmit}>
-                        <label htmlFor='bookSearch'>Search for book</label>
+                        <label className="sr-only" htmlFor='bookSearch'>Search for book</label>
                         <input
                             type='search'
                             className='search-bar'
@@ -84,8 +84,8 @@ const FormField = () => {
 
                 </section>
 
-            </div>
-            <section>
+            {/* </div> */}
+            <main>
                 {searchType && result ? (
                     <Search
                         type={searchType}
@@ -94,7 +94,7 @@ const FormField = () => {
                     />
                 ) : null}
 
-            </section>
+            </main>
         </>
     )
 }

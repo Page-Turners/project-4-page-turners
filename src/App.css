@@ -237,6 +237,8 @@ template {
 /* Global Styles */
 html {
   font-size: 62.5%;
+  height: 100vh;
+  background-color:#FBDEBE ;
 }
 
 * {
@@ -270,6 +272,21 @@ h3,
 h1 {
   font-family: 'Maitree', serif;
 }
+
+.bookMark {
+  font-size: 30px;
+  color:#CBE8EC;
+}
+.iconBtn {
+  background: rgba(0, 0, 0, 0);
+  position: absolute;
+  top:0;
+  right:0;
+
+}
+/* button {
+  outline: none;
+} */
 
 /* Form Field */
 input,
@@ -353,16 +370,3 @@ h3 {
 
 
 
-.bookMark {
-  font-size: 30px;
-  color:#CBE8EC;
-}
-.iconBtn {
-  position: absolute;
-  top:0;
-  right:0;
-}
-button {
-  outline: none;
-  
-}
