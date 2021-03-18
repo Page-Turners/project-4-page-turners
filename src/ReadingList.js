@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import React, { Fragment } from 'react';
 import firebase from './firebase.js'
 
 const ReadingList = (props) => {
   const [booksCompleted, setBooksCompleted] = useState([]);
+  const [readingListBooks,setReadingListBooks] = useState([])
   const { readingListArray } = props;
+  const totalReadingListSize = readingListArray.length; 
 
   console.log("READINGLIST START");
   console.log(readingListArray);
@@ -23,71 +25,57 @@ const ReadingList = (props) => {
     });
   }
 
-  const sortBooks = () => {
+
+  useEffect(() => {
+    
     console.log("Sort books HERE !");
-    let result = "";
     let sortRef = firebase.database().ref();
+    const completedBookHold = [];
+    const readingListBooksHold = [];
     
     sortRef.on('value',(data)=>{
       //console.log(data.val());
       const sortData = data.val();
-     // const booksToBeSorted = [];
-
+  
       for (let bookKey in sortData){
        // console.log(sortData[bookKey]);
         if (sortData[bookKey].hasRead === true)
         {
-          
-          result = result+ `<div className='book'>
-            <div className='reading-list-container'>
-              <img
-                src={sortData[bookKey].volumeInfo.imageLinks.thumbnail} alt={sortData[bookKey].volumeInfo.title}
-              />
-            </div>
-
-            <h3>{sortData[bookKey].volumeInfo.title}</h3>
-            <p>{sortData[bookKey].volumeInfo.subtitle}</p>
-            <p>{sortData[bookKey].volumeInfo.authors}</p>
-            <p>{sortData[bookKey].volumeInfo.categories}</p>
-            <p>{sortData[bookKey].volumeInfo.averageRating}</p>
-            <button onClick={() => handleComplete(sortData[bookKey].id)}>Complete!</button>
-            {/* <button onClick={() => {
-                  handleRemove(bookResult.id)
-                }}>remove from List!</button>  */}
-          </div>`;
-          
+           completedBookHold.push(sortData[bookKey]); 
         }
         else{
-          
-
+          readingListBooksHold.push(sortData[bookKey]);
         }
       }
-      return(result)
+      
     })
+    setBooksCompleted(completedBookHold);
+    setReadingListBooks(readingListBooksHold);
     
-    //console.log(sortRef.data);
+  },[])
 
-    // bookRef = readingListArray.filter((book) => {
-    //   return (book.hasRead === true)
-    //     ?
-    //     <h1>has found</h1>
-    //     : <p>Not found</p>
-    // });
+  // returns how many books the user has read vs how many are left in the reading list
+  const percentRead = () => {
     
+    return (Math.floor((booksCompleted.length / totalReadingListSize)*100));
+
   }
-  
+
+
   return (
-    
+    <div>
+
+
     <ul className="bookShelf">
-      {sortBooks()}
+      {/* {sortBooks()} */}
       {
-        readingListArray.map((book, index) => {
-          const bookData = book.bookObj;
-          // console.log(bookData);
+        readingListBooks.map((book, index) => {
+          const bookData = book;
+           console.log(bookData);
           return (
             <Fragment key={index}>
               <div className='book'>
-                {/* <div className='reading-list-container'>
+                <div className='reading-list-container'>
                 
                   <img
                     src={bookData.volumeInfo.imageLinks.thumbnail} alt={bookData.volumeInfo.title}
@@ -100,7 +88,7 @@ const ReadingList = (props) => {
                 <p>{bookData.volumeInfo.averageRating}</p>
 
                 <button onClick={() => handleComplete(bookData.id)}>Complete!</button>
-                {/* <button onClick={() => {
+                 {/* <button onClick={() => {
                   handleRemove(bookResult.id)
                 }}>remove from List!</button>  */}
               </div> 
@@ -109,8 +97,46 @@ const ReadingList = (props) => {
 
         })
       }
-
     </ul>
+
+
+    <ul>
+       {
+          booksCompleted.map((book, index) => {
+          const completedBookData = book;
+          // console.log(bookData);
+          return (
+            <Fragment key={index}>
+              <div className='book'>
+                <div className='reading-list-container'>
+                
+                  <img
+                    src={completedBookData.volumeInfo.imageLinks.thumbnail} alt={completedBookData.volumeInfo.title}
+                  />
+                </div>
+                <h3>{completedBookData.volumeInfo.title}</h3>
+                <p>{completedBookData.volumeInfo.subtitle}</p>
+                <p>{completedBookData.volumeInfo.authors}</p>
+                <p>{completedBookData.volumeInfo.categories}</p>
+                <p>{completedBookData.volumeInfo.averageRating}</p>
+
+                {/* <button onClick={() => handleComplete(completedBookData.id)}>Complete!</button> */}
+                 {/* <button onClick={() => {
+                  handleRemove(bookResult.id)
+                }}>remove from List!</button>  */}
+              </div> 
+          </Fragment>
+          )
+
+        })
+      }
+    </ul>
+    <aside>
+        <h1>{percentRead()}%</h1>
+        {/* <h1>{totalReadingListSize}</h1>
+        <h1>{booksCompleted.length}</h1> */}
+    </aside>
+    </div>
   )
 }
 export default ReadingList;
