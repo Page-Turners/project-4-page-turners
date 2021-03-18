@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react' //import firebase into our component
 import firebase from './firebase.js'
+// import { Link } from 'react-router-dom';
 //import ReadingList from './ReadingList'
 
 function Search(props) {
@@ -107,8 +108,8 @@ function Search(props) {
   // console.log(searchResult)
   // console.log('fdsfjsdf')
   return (
-    <section className='search-container'>
-      <div className="wrapper">
+    <section className='search-container wrapper'>
+      {/* <div className="wrapper"> */}
         {searchResult.map((bookResult) => {
           // console.log(bookResult);
           return (
@@ -127,7 +128,7 @@ function Search(props) {
 
               {/* book details */}
               {bookResult.volumeInfo.title ? (
-                <h3>{bookResult.volumeInfo.title}</h3>
+                <h2>{bookResult.volumeInfo.title}</h2>
               ) : (
                 <h3>No title available</h3>
               )}
@@ -135,25 +136,25 @@ function Search(props) {
               {bookResult.volumeInfo.subtitle ? (
                 <h3>{bookResult.volumeInfo.subtitle}</h3>
               ) : (
-                <h3>---</h3>
+                <h3></h3>
               )}
 
               {bookResult.volumeInfo.authors.join(', ') ? (
                 <p>{bookResult.volumeInfo.authors}</p>
               ) : (
-                <p>---</p>
+                <p></p>
               )}
 
               {bookResult.volumeInfo.categories ? (
                 <p>{bookResult.volumeInfo.categories}</p>
               ) : (
-                <p>---</p>
+                <p></p>
               )}
 
               {bookResult.volumeInfo.averageRating ? (
-                <p>{bookResult.volumeInfo.averageRating}</p>
+                <p>rating: {bookResult.volumeInfo.averageRating}</p>
               ) : (
-                <p>---</p>
+                <p></p>
               )}
 
               {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
@@ -175,7 +176,7 @@ function Search(props) {
           )
         })}
         {/* <ReadingList booksArray={booksArray} /> */}
-      </div>
+      {/* </div> */}
     </section>
   )
 }

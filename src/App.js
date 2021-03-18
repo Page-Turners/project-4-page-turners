@@ -47,10 +47,20 @@ function App() {
   return (
     <Router>
       <header>
-        <h1>Page Turner App</h1>
+      <Link to={"/"}>
+        <h1>Page Turner</h1>
+      </Link>
       </header>
 
-      <Link to="/"><FontAwesomeIcon icon={faBookmark} className="bookMark" /></Link>
+      <Link to={"/readinglist"} >
+      <button className="icon-button">
+        <FontAwesomeIcon icon={faBookmark} className="bookMark" />
+      </button>
+    </Link>
+
+      {/* <Link to={"/readinglist"}>
+        <FontAwesomeIcon icon={faBookmark} className="bookMark" />
+        </Link> */}
 
       <Route path='/' exact >
         <FormField />
