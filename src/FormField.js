@@ -8,7 +8,6 @@ const FormField = () => {
     const [searchType, setSearchType] = useState('')
     const [userInput, setUserInput] = useState('')
     const [radioInput, setRadioInput] = useState('')
-    const [formBooksArray, setFormBooksArray] = useState([])
 
     const handleUserInput = (event) => {
         const selectedText = event.target.value

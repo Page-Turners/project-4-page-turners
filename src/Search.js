@@ -8,14 +8,8 @@ function Search(props) {
   const [searchResult, setSearchResult] = useState([])
   const [searchBooksArray, setSearchBooksArray] = useState([])
 
-  const {  text, type } = props
+  // const {  text, type } = props
 
-  console.log(props.text, props.type)
-
-  // const searchObj = {}
-
-  // searchObj.userSearch = searchBook.text
-  // searchObj.userChoice = searchBook.type
 
   const getSearchedBook = (type, text) => {
     console.log(type, text)
