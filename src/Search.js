@@ -94,17 +94,7 @@ function Search(props) {
     }
   }
 
-  const handleRemove = (bookId) => {
-    const dbRef = firebase.database().ref()
-    const copyOfAllBooks = [...searchBooksArray]
-    const bookInfo = copyOfAllBooks.filter((book) => {
-      console.log(book.bookObj.id)
-      return book.bookObj.id === bookId
-        ? dbRef.child(book.uniqueKey).remove()
-        : null
-    })
-    //console.log(copyOfAllBooks);
-  }
+  
   // console.log(searchResult)
   // console.log('fdsfjsdf')
   return (
@@ -151,7 +141,7 @@ function Search(props) {
             )}
 
             {bookResult.volumeInfo.averageRating ? (
-              <p>rating: {bookResult.volumeInfo.averageRating}</p>
+              <p>rating:{bookResult.volumeInfo.averageRating}/5</p>
             ) : (
               <p></p>
             )}
@@ -164,13 +154,7 @@ function Search(props) {
             <button onClick={() => checkDuplicate(bookResult)}>
               Add to List!
             </button>
-            <button
-              onClick={() => {
-                handleRemove(bookResult.id)
-              }}
-            >
-              remove from List!
-            </button>
+           
           </div>
         )
       })}
