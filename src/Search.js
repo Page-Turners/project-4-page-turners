@@ -61,7 +61,7 @@ function Search(props) {
       setSearchBooksArray(bookHold)
     })
     // getSearchedBook(searchObj)
-  }, [])
+  }, [props.text, props.type])
 
   // Adding things to FireBase
 
@@ -119,7 +119,7 @@ function Search(props) {
             {bookResult.volumeInfo.subtitle ? (
               <h3>{bookResult.volumeInfo.subtitle}</h3>
             ) : (
-              <h3></h3>
+              <p></p>
             )}
 
             {bookResult.volumeInfo.authors.join(', ') ? (
