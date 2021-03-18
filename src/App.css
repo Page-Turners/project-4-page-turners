@@ -139,6 +139,7 @@ button:-moz-focusring,
 }
 fieldset {
   padding: 0.35em 0.75em 0.625em;
+  border:none;
 }
 legend {
   box-sizing: border-box;
@@ -241,9 +242,9 @@ html {
   background-color:#FBDEBE ;
 }
 
-* {
+/* * {
   border: 1px black solid;
-}
+} */
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -271,6 +272,7 @@ h1 {
 h3,
 h1 {
   font-family: 'Maitree', serif;
+  color:white;
 }
 
 .bookMark {
@@ -294,10 +296,17 @@ label,
 fieldset {
   margin-bottom: 1rem;
 }
-
+.form-container  {
+  background-color: #CBE8EC;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
 .form-field {
-  height: auto;
-  background-color: #CBE8EC ;
+  max-width:60%;
+  width:100%;
+  text-align: center;
 }
 
 form {
@@ -327,12 +336,11 @@ input[type='radio'] {
 }
 
 .search-button {
-  width: 120px;
-  height: 50px;
   font-family: 'Maitree', serif;
   background-color:#ACA9BB;
   border: 0 none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  padding:0.75rem 1rem;
 }
 
 /* Grid of Books */
@@ -345,14 +353,14 @@ main {
   gap: 4rem;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
   padding: 5% 0;
-  
-  
+  background-color: #CBE8EC;
 }
 
 .book {
-  display: grid;
-  justify-content: center;
+  display: grid; 
+  justify-content: center; 
   text-align: center;
+  background-color: #FBDEBE;
 }
 .image-container {
   height: 200px;
@@ -361,12 +369,22 @@ main {
 
 .book img {
   height: 100%;
-  
 }
 
 h3 {
   font-size: 1.8rem;
 }
 
+.bookMark {
+  position: absolute;
+  top:3%;
+  right:3%;
+  font-size: 40px;
+  color:#CBE8EC;
+}
 
-
+button {
+  outline: none;
+  background-color:#ACA9BB ;
+  color:white;
+}

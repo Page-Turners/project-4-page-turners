@@ -2,10 +2,11 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import firebase from './firebase.js'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-
-import Header from './Header'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+// import Header from './Header'
 import FormField from './FormField'
 import Search from './Search'
 import ReadingList from './ReadingList'
@@ -45,7 +46,12 @@ function App() {
 
   return (
     <Router>
-      <Header />
+      <header>
+        <h1>Page Turner App</h1>
+      </header>
+
+      <Link to="/"><FontAwesomeIcon icon={faBookmark} className="bookMark" /></Link>
+
       <Route path='/' exact >
         <FormField />
         {/* component ={FormField} */}

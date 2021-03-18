@@ -107,73 +107,75 @@ function Search(props) {
   // console.log(searchResult)
   // console.log('fdsfjsdf')
   return (
-    <section className='search-container wrapper'>
-      {searchResult.map((bookResult) => {
-        // console.log(bookResult);
-        return (
-          <div className='book' key={bookResult.id}>
-            <div className='image-container'>
-              {
-                (bookResult.volumeInfo.imageLinks) ?
-                  <img
-                    src={bookResult.volumeInfo.imageLinks.thumbnail}
-                    alt={bookResult.volumeInfo.title}
-                  />
-                  :
-                  <h3>No image available</h3>
-              }
-            </div>
+    <section className='search-container'>
+      <div className="wrapper">
+        {searchResult.map((bookResult) => {
+          // console.log(bookResult);
+          return (
+            <div className='book' key={bookResult.id}>
+              <div className='image-container'>
+                {
+                  (bookResult.volumeInfo.imageLinks) ?
+                    <img
+                      src={bookResult.volumeInfo.imageLinks.thumbnail}
+                      alt={bookResult.volumeInfo.title}
+                    />
+                    :
+                    <h3>No image available</h3>
+                }
+              </div>
 
-            {/* book details */}
-            {bookResult.volumeInfo.title ? (
-              <h3>{bookResult.volumeInfo.title}</h3>
-            ) : (
-              <h3>No title available</h3>
-            )}
+              {/* book details */}
+              {bookResult.volumeInfo.title ? (
+                <h3>{bookResult.volumeInfo.title}</h3>
+              ) : (
+                <h3>No title available</h3>
+              )}
 
-            {bookResult.volumeInfo.subtitle ? (
-              <h3>{bookResult.volumeInfo.subtitle}</h3>
-            ) : (
-              <h3>---</h3>
-            )}
+              {bookResult.volumeInfo.subtitle ? (
+                <h3>{bookResult.volumeInfo.subtitle}</h3>
+              ) : (
+                <h3>---</h3>
+              )}
 
-            {bookResult.volumeInfo.authors.join(', ') ? (
-              <p>{bookResult.volumeInfo.authors.join(', ')}</p>
-            ) : (
-              <p>---</p>
-            )}
+              {bookResult.volumeInfo.authors.join(', ') ? (
+                <p>{bookResult.volumeInfo.authors}</p>
+              ) : (
+                <p>---</p>
+              )}
 
-            {bookResult.volumeInfo.categories ? (
-              <p>{bookResult.volumeInfo.categories}</p>
-            ) : (
-              <p>---</p>
-            )}
+              {bookResult.volumeInfo.categories ? (
+                <p>{bookResult.volumeInfo.categories}</p>
+              ) : (
+                <p>---</p>
+              )}
 
-            {bookResult.volumeInfo.averageRating ? (
-              <p>{bookResult.volumeInfo.averageRating}</p>
-            ) : (
-              <p>---</p>
-            )}
+              {bookResult.volumeInfo.averageRating ? (
+                <p>{bookResult.volumeInfo.averageRating}</p>
+              ) : (
+                <p>---</p>
+              )}
 
-            {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
+              {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
             <p>{bookResult.volumeInfo.authors.join(', ')}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p> */}
 
-            <button onClick={() => checkDuplicate(bookResult)}>
-              Add to List!
+              <button onClick={() => checkDuplicate(bookResult)}>
+                Add to List!
             </button>
-            <button
-              onClick={() => {
-                handleRemove(bookResult.id)
-              }}
-            >
-              remove from List!
+              <button
+                onClick={() => {
+                  handleRemove(bookResult.id)
+                }}
+              >
+                remove from List!
             </button>
-          </div>
-        )
-      })}
-      {/* <ReadingList booksArray={booksArray} /> */}
+            </div>
+          )
+        })}
+        {/* <ReadingList booksArray={booksArray} /> */}
+      </div>
     </section>
   )
 }
