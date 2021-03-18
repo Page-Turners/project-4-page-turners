@@ -48,7 +48,19 @@ const ReadingList = (props) => {
 
   // returns how many books the user has read vs how many are left in the reading list
   const percentRead = () => {
-    return Math.floor((booksCompleted.length / totalReadingListSize) * 100)
+    if (booksCompleted.length > 0)
+    {
+      return `${Math.floor((booksCompleted.length / totalReadingListSize) * 100)}`
+    
+    } else if (booksCompleted.length === 0) {
+      return "0% Better get reading!"
+
+    } else if ((booksCompleted.length / totalReadingListSize) === 1) {
+      return "100%! Good Work! "
+    } else {
+      return "Couldn't calculate!"
+    }
+
   }
 
   const handleRemove = (bookId) => {
@@ -196,7 +208,7 @@ const ReadingList = (props) => {
 
       <aside className='readingProgress'>
         <h1 className='readingPercentage'>
-          Reading Progress: {percentRead()}%
+          Reading Progress: {percentRead()}
         </h1>
         {/* <h1>{totalReadingListSize}</h1>
         <h1>{booksCompleted.length}</h1> */}
