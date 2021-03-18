@@ -139,7 +139,7 @@ button:-moz-focusring,
 }
 fieldset {
   padding: 0.35em 0.75em 0.625em;
-  border:none;
+  border: none;
 }
 legend {
   box-sizing: border-box;
@@ -239,7 +239,7 @@ template {
 html {
   font-size: 62.5%;
   height: 100vh;
-  background-color:#FBDEBE ;
+  background-color: #fbdebe;
 }
 
 /* * {
@@ -262,7 +262,7 @@ header {
   display: grid;
   justify-content: center;
   text-align: center;
-  background-color:#ACA9BB;
+  background-color: #aca9bb;
   /* height: 10vh; */
 }
 
@@ -276,8 +276,6 @@ h2,
 h3,
 h4 {
   font-family: 'Maitree', serif;
- 
-  
 }
 h2 {
   font-size: 2.5rem;
@@ -287,7 +285,7 @@ h3 {
   font-size: 2rem;
 }
 
-p{
+p {
   font-size: 1.75rem;
 }
 
@@ -298,17 +296,15 @@ p {
 
 .bookMark {
   font-size: 30px;
-  color:#CBE8EC;
+  color: #cbe8ec;
 }
 .iconBtn {
   background: rgba(0, 0, 0, 0);
   position: absolute;
-  top:0;
-  right:0;
+  top: 0;
+  right: 0;
   cursor: pointer;
-
 }
-
 
 /* Form Field */
 input,
@@ -316,16 +312,16 @@ label,
 fieldset {
   margin-bottom: 1rem;
 }
-.form-container  {
-  background-color: #CBE8EC;
-  display:flex;
+.form-container {
+  background-color: #cbe8ec;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
 }
 .form-field {
-  max-width:60%;
-  width:100%;
+  max-width: 60%;
+  width: 100%;
   text-align: center;
 }
 
@@ -341,13 +337,11 @@ form {
   border-radius: 100px;
   border: none;
   padding: 15px;
-  
 }
 
 ::placeholder {
   font-size: 20px;
   text-align: center;
-  
 }
 
 input[type='radio'] {
@@ -358,27 +352,30 @@ input[type='radio'] {
 
 .radio-label {
   font-size: 2.5rem;
-  
 }
 
 .search-button {
   /* font-family: 'Maitree', serif; */
   font-family: 'Montserrat', sans-serif;
-  background-color:#ACA9BB;
+  background-color: #aca9bb;
   border: 0 none;
   font-size: 1.8rem;
-  padding:0.75rem 1rem;
+  padding: 0.75rem 1rem;
   cursor: pointer;
 }
 .search-button:hover,
 .search-button:focus {
-  background-color: #FBDEBE;
+  background-color: #fbdebe;
   color: black;
+}
+
+button {
+  border-radius: 40px;
 }
 
 /* Grid of Books */
 main {
-  background-color: #FBDEBE ;
+  background-color: #fbdebe;
 }
 
 .search-container {
@@ -390,10 +387,10 @@ main {
 }
 
 .book {
-  display: grid; 
-  justify-content: center; 
+  display: grid;
+  justify-content: center;
   text-align: center;
-  background-color: #FBDEBE;
+  background-color: #fbdebe;
 }
 .image-container {
   height: 200px;
@@ -414,18 +411,18 @@ h3 {
   top:3%;
   right:3%; */
   font-size: 40px;
-  color:#CBE8EC;
+  color: #cbe8ec;
 }
 
-.bookMark:hover{
-  color: #FBDEBE;
+.bookMark:hover {
+  color: #fbdebe;
   font-size: 45px;
 }
 
 .icon-button {
-position: absolute;
-  top:3%;
-  right:3%; 
+  position: absolute;
+  top: 3%;
+  right: 3%;
   padding: 10px;
 }
 
@@ -435,12 +432,22 @@ position: absolute;
 
 button {
   outline: none;
-  background-color:#ACA9BB ;
-  color:white;
+  background-color: #aca9bb;
+  color: white;
   border: none;
   margin: 3px;
   padding: 2px;
   cursor: pointer;
 }
 
+/* Media Queries */
 
+@media only screen and (max-width: 600px) {
+  .icon-button {
+    position: absolute;
+    top: 20%;
+    right: 44%;
+    padding: 10px;
+    border: 5px solid white;
+  }
+}
