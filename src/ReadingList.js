@@ -16,7 +16,7 @@ const ReadingList = (props) => {
     console.log(completedBook)
     let bookRef = firebase.database()
 
-    // const bookFound = 
+   
     readingListArray.filter((book) => {
       return book.bookObj.id === completedBook
         ? bookRef.ref(book.uniqueKey).update({ hasRead: true })
@@ -31,11 +31,11 @@ const ReadingList = (props) => {
     const readingListBooksHold = []
 
     sortRef.on('value', (data) => {
-      //console.log(data.val());
+    
       const sortData = data.val()
 
       for (let bookKey in sortData) {
-        // console.log(sortData[bookKey]);
+        
         if (sortData[bookKey].hasRead === true) {
           completedBookHold.push(sortData[bookKey])
         } else {
@@ -67,21 +67,20 @@ const ReadingList = (props) => {
   const handleRemove = (bookId) => {
     const dbRef = firebase.database().ref()
     const copyOfAllBooks = [...readingListArray]
-    // const bookInfo = 
+    
     copyOfAllBooks.filter((book) => {
       console.log(book.bookObj.id)
       return book.bookObj.id === bookId
         ? dbRef.child(book.uniqueKey).remove()
         : null
     })
-    //console.log(copyOfAllBooks);
+    
   }
 
   return (
     <div className='wrapper'>
       <h2 className='readingListTitle'>Reading Library</h2>
       <ul className='bookShelf'>
-        {/* {sortBooks()} */}
         {readingListBooks.map((book, index) => {
           const bookData = book
           console.log(bookData)
@@ -112,8 +111,8 @@ const ReadingList = (props) => {
               <p></p>
             )}
 
-            {bookData.volumeInfo.authors.join(', ') ? (
-              <p>{bookData.volumeInfo.authors}</p>
+            {bookData.volumeInfo.authors ? (
+                  <p>{(bookData.volumeInfo.authors).join(', ')}</p>
             ) : (
               <p></p>
             )}
@@ -133,10 +132,7 @@ const ReadingList = (props) => {
                 <button onClick={() => handleComplete(bookData.id)}>
                   Complete!
                 </button>
-                
-                {/* <button onClick={() => {
-                  handleRemove(bookResult.id)
-                }}>remove from List!</button>  */}
+              
               </div>
             </Fragment>
           )
@@ -147,7 +143,7 @@ const ReadingList = (props) => {
       <ul className='completedShelf'>
         {booksCompleted.map((book, index) => {
           const completedBookData = book
-          // console.log(bookData);
+         
           return (
             <Fragment key={index}>
               <div className='book'>
@@ -175,8 +171,8 @@ const ReadingList = (props) => {
                  <p></p>
                 )}
 
-                {completedBookData.volumeInfo.authors.join(', ') ? (
-                  <p>{completedBookData.volumeInfo.authors}</p>
+                {completedBookData.volumeInfo.authors ? (
+                  <p>{(completedBookData.volumeInfo.authors).join(', ')}</p>
                 ) : (
                   <p></p>
                 )}
@@ -199,9 +195,7 @@ const ReadingList = (props) => {
                 >
                   remove from List!
             </button>
-                {/* <button onClick={() => {
-                  handleRemove(bookResult.id)
-                }}>remove from List!</button>  */}
+               
               </div>
             </Fragment>
           )
@@ -212,8 +206,7 @@ const ReadingList = (props) => {
         <h1 className='readingPercentage'>
           Reading Progress: {percentRead()}
         </h1>
-        {/* <h1>{totalReadingListSize}</h1>
-        <h1>{booksCompleted.length}</h1> */}
+  
       </aside>
     </div>
   )

@@ -1,18 +1,16 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react' //import firebase into our component
 import firebase from './firebase.js'
-// import { Link } from 'react-router-dom';
-//import ReadingList from './ReadingList'
+
 
 function Search(props) {
   const [searchResult, setSearchResult] = useState([])
   const [searchBooksArray, setSearchBooksArray] = useState([])
 
-  // const {  text, type } = props
 
 
   const getSearchedBook = (type, text) => {
-    console.log(type, text)
+  
     let query = ''
 
     if (type === 'author') {
@@ -21,7 +19,7 @@ function Search(props) {
       query = `intitle:${text}`
     }
 
-    console.log('calling the api')
+    
     try {
       axios({
         url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -30,10 +28,8 @@ function Search(props) {
         params: {
           key: 'AIzaSyD6hfO1VwuXSmtlAk1VAkDP9az-txUHM70',
           q: query,
-          // maxResults: 40
         },
       }).then((res) => {
-        // console.log(res.data.items)
         setSearchResult(res.data.items)
       })
     } catch (error) {
@@ -51,8 +47,7 @@ function Search(props) {
       const bookHold = []
       //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
       for (let bookKey in bookData) {
-        //console.log(bookKey);
-        //console.log(bookData);
+ 
         bookHold.push({
           uniqueKey: bookKey,
           bookObj: bookData[bookKey],
@@ -60,7 +55,7 @@ function Search(props) {
       }
       setSearchBooksArray(bookHold)
     })
-    // getSearchedBook(searchObj)
+   
   }, [props.text, props.type])
 
   // Adding things to FireBase
@@ -89,13 +84,12 @@ function Search(props) {
   }
 
   
-  // console.log(searchResult)
-  // console.log('fdsfjsdf')
+ 
   return (
     <section className='search-container wrapper'>
-      {/* <div className="wrapper"> */}
+   
       {searchResult.map((bookResult) => {
-        // console.log(bookResult);
+       
         return (
           <div className='book' key={bookResult.id}>
             <div className='image-container'>
@@ -122,8 +116,8 @@ function Search(props) {
               <p></p>
             )}
 
-            {bookResult.volumeInfo.authors.join(', ') ? (
-              <p>{bookResult.volumeInfo.authors}</p>
+            {bookResult.volumeInfo.authors ? (
+              <p>{(bookResult.volumeInfo.authors).join(', ')}</p>
             ) : (
               <p></p>
             )}
@@ -140,10 +134,6 @@ function Search(props) {
               <p></p>
             )}
 
-            {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
-            <p>{bookResult.volumeInfo.authors.join(', ')}</p>
-            <p>{bookResult.volumeInfo.categories}</p>
-            <p>{bookResult.volumeInfo.averageRating}</p> */}
 
             <button onClick={() => checkDuplicate(bookResult)}>
               Add to List!
@@ -152,8 +142,6 @@ function Search(props) {
           </div>
         )
       })}
-      {/* <ReadingList booksArray={booksArray} /> */}
-      {/* </div> */}
     </section>
   )
 }

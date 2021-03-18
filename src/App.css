@@ -269,7 +269,8 @@ header {
 h1 {
   font-size: 6rem;
   text-decoration: none;
-  color: white;
+  color: #fbdebe;
+  text-shadow: 4px 3px 0 #7A7A7A;
   
 }
 h1,
@@ -310,6 +311,7 @@ p {
 a:link {
   text-decoration: none;
 }
+
 
 /* Form Field */
 input,
@@ -454,7 +456,8 @@ button {
   gap: 4rem;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
   padding: 5% 0;
-  border: 5px solid #aca9bb;
+  border: 2px solid #aca9bb;
+  border-radius: 30px;
 }
 
 .readingListTitle {
@@ -474,7 +477,8 @@ button {
 
 /* Reading Progress */
 .readingProgress {
-  border: 5px solid #aca9bb;
+  border: 2px solid #aca9bb;
+  border-radius: 30px;
 }
 
 .readingPercentage {
@@ -483,6 +487,23 @@ button {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
 }
+
+/* footer */
+
+footer {
+  text-align: center;
+  font-size: 2.5rem;
+  height: 5vh;
+  background-color: #aca9bb;
+  position: relative;
+  top: 200px;
+  padding:2rem;
+}
+
+a {
+  color: black;
+}
+
 
 /* Media Queries */
 

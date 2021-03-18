@@ -11,13 +11,13 @@ const FormField = () => {
 
     const handleUserInput = (event) => {
         const selectedText = event.target.value
-        console.log('userinput!')
+        
         setUserInput(selectedText)
     }
 
     const handleRadioInput = (event) => {
         const selectedRadio = event.target.value
-        console.log('radioinput!')
+       
         setRadioInput(selectedRadio)
     }
     //   handles submit on searchbar

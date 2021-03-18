@@ -1,23 +1,13 @@
-// import firebase from './firebase.js';
 import { useState, useEffect } from 'react'
 import './App.css'
 import firebase from './firebase.js'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-// import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
-// import Header from './Header'
 import FormField from './FormField'
 import ReadingList from './ReadingList'
 
 function App() {
-  // books is an array
-  // const [book, setBook] = useState([])
-  // results is an empty array
-  // const [result, setResult] = useState('')
-  // const [searchType, setSearchType] = useState('')
-
-  //firebase data
   const [booksArray, setBooksArray] = useState([])
 
 
@@ -31,8 +21,6 @@ function App() {
       const bookHold = []
       //use a for In loop to traverse this object ad push the book titles (AKA the property VALUES within the object) into the created array
       for (let bookKey in bookData) {
-        //console.log(bookKey);
-        //console.log(bookData);
         bookHold.push({
           uniqueKey: bookKey,
           bookObj: bookData[bookKey],
@@ -52,18 +40,15 @@ function App() {
       </header>
 
       <Link to={"/readinglist"} >
-      <button className="icon-button">
+      <button className="icon-button" >
         <FontAwesomeIcon icon={faBookmark} className="bookMark" />
       </button>
     </Link>
 
-      {/* <Link to={"/readinglist"}>
-        <FontAwesomeIcon icon={faBookmark} className="bookMark" />
-        </Link> */}
 
       <Route path='/' exact >
         <FormField />
-        {/* component ={FormField} */}
+        
 
       </Route>
 
@@ -72,6 +57,11 @@ function App() {
         path='/readinglist'
         render={() => <ReadingList readingListArray={booksArray} />}
       />
+      <footer>
+        <p>Copyright 
+         <a href="https://www.junocollege.com"> Juno College</a>
+        </p>
+      </footer>
     </Router>
   )
 }
