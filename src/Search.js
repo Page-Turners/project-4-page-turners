@@ -23,7 +23,7 @@ function Search(props) {
 
     if (type === 'author') {
       query = `inauthor:${text}`
-    } else if (type === "title") {
+    } else if (type === 'title') {
       query = `intitle:${text}`
     }
 
@@ -73,8 +73,8 @@ function Search(props) {
 
   const handleClick = (e) => {
     let totalBook = {}
-    totalBook = e;
-    totalBook.hasRead = false;
+    totalBook = e
+    totalBook.hasRead = false
 
     const dbRef = firebase.database().ref()
     dbRef.push(totalBook)
@@ -110,72 +110,71 @@ function Search(props) {
   return (
     <section className='search-container wrapper'>
       {/* <div className="wrapper"> */}
-        {searchResult.map((bookResult) => {
-          // console.log(bookResult);
-          return (
-            <div className='book' key={bookResult.id}>
-              <div className='image-container'>
-                {
-                  (bookResult.volumeInfo.imageLinks) ?
-                    <img
-                      src={bookResult.volumeInfo.imageLinks.thumbnail}
-                      alt={bookResult.volumeInfo.title}
-                    />
-                    :
-                    <h3>No image available</h3>
-                }
-              </div>
-
-              {/* book details */}
-              {bookResult.volumeInfo.title ? (
-                <h2>{bookResult.volumeInfo.title}</h2>
+      {searchResult.map((bookResult) => {
+        // console.log(bookResult);
+        return (
+          <div className='book' key={bookResult.id}>
+            <div className='image-container'>
+              {bookResult.volumeInfo.imageLinks ? (
+                <img
+                  src={bookResult.volumeInfo.imageLinks.thumbnail}
+                  alt={bookResult.volumeInfo.title}
+                />
               ) : (
-                <h3>No title available</h3>
+                <h3>No image available</h3>
               )}
+            </div>
 
-              {bookResult.volumeInfo.subtitle ? (
-                <h3>{bookResult.volumeInfo.subtitle}</h3>
-              ) : (
-                <h3></h3>
-              )}
+            {/* book details */}
+            {bookResult.volumeInfo.title ? (
+              <h2>{bookResult.volumeInfo.title}</h2>
+            ) : (
+              <h3>No title available</h3>
+            )}
 
-              {bookResult.volumeInfo.authors.join(', ') ? (
-                <p>{bookResult.volumeInfo.authors}</p>
-              ) : (
-                <p></p>
-              )}
+            {bookResult.volumeInfo.subtitle ? (
+              <h3>{bookResult.volumeInfo.subtitle}</h3>
+            ) : (
+              <h3></h3>
+            )}
 
-              {bookResult.volumeInfo.categories ? (
-                <p>{bookResult.volumeInfo.categories}</p>
-              ) : (
-                <p></p>
-              )}
+            {bookResult.volumeInfo.authors.join(', ') ? (
+              <p>{bookResult.volumeInfo.authors}</p>
+            ) : (
+              <p></p>
+            )}
 
-              {bookResult.volumeInfo.averageRating ? (
-                <p>rating: {bookResult.volumeInfo.averageRating}</p>
-              ) : (
-                <p></p>
-              )}
+            {bookResult.volumeInfo.categories ? (
+              <p>{bookResult.volumeInfo.categories}</p>
+            ) : (
+              <p></p>
+            )}
 
-              {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
+            {bookResult.volumeInfo.averageRating ? (
+              <p>rating: {bookResult.volumeInfo.averageRating}</p>
+            ) : (
+              <p></p>
+            )}
+
+            {/* <h4>{bookResult.volumeInfo.subtitle}</h4>
             <p>{bookResult.volumeInfo.authors.join(', ')}</p>
             <p>{bookResult.volumeInfo.categories}</p>
             <p>{bookResult.volumeInfo.averageRating}</p> */}
 
-              <button onClick={() => checkDuplicate(bookResult)}>
-                Add to List!
+            <button onClick={() => checkDuplicate(bookResult)}>
+              Add to List!
             </button>
-              <button
-                onClick={() => {
-                  handleRemove(bookResult.id)
-                }}
-              >
-                remove from List!
+            <button
+              onClick={() => {
+                handleRemove(bookResult.id)
+              }}
+            >
+              remove from List!
             </button>
-            </div>
-          )
-        })}
-        {/* <ReadingList booksArray={booksArray} /> */}
+          </div>
+        )
+      })}
+      {/* <ReadingList booksArray={booksArray} /> */}
       {/* </div> */}
     </section>
   )

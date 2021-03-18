@@ -306,6 +306,10 @@ p {
   cursor: pointer;
 }
 
+a:link {
+  text-decoration: none;
+}
+
 /* Form Field */
 input,
 label,
@@ -438,6 +442,45 @@ button {
   margin: 3px;
   padding: 2px;
   cursor: pointer;
+  font-size: 2.5rem;
+}
+
+/* Reading List*/
+
+.bookShelf,
+.completedShelf {
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+  padding: 5% 0;
+  border: 5px solid #aca9bb;
+}
+
+.readingListTitle {
+  text-align: center;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+/* Completed List */
+.completedListTitle {
+  text-align: center;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+/* Reading Progress */
+.readingProgress {
+  border: 5px solid #aca9bb;
+}
+
+.readingPercentage {
+  text-align: center;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 /* Media Queries */
