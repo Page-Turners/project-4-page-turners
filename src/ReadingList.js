@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import React, { Fragment } from 'react'
 import firebase from './firebase.js'
@@ -48,7 +49,7 @@ const ReadingList = (props) => {
     })
     setBooksCompleted(completedBookHold)
     setReadingListBooks(readingListBooksHold)
-  }, [booksCompleted.hasRead])
+  }, [])
 
   // returns how many books the user has read vs how many are left in the reading list
   const percentRead = () => {
