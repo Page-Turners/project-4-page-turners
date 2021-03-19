@@ -8,12 +8,11 @@ const ReadingList = (props) => {
   const { readingListArray } = props
   const totalReadingListSize = readingListArray.length
 
-  console.log('READINGLIST START')
-  console.log(readingListArray)
+ 
 
   //Sets the hasRead Attribute in firebase to true
   const handleComplete = (completedBook) => {
-    console.log(completedBook)
+    
     let bookRef = firebase.database()
 
    
@@ -25,7 +24,7 @@ const ReadingList = (props) => {
   }
 
   useEffect(() => {
-    console.log('Sort books HERE !')
+    
     let sortRef = firebase.database().ref()
     const completedBookHold = []
     const readingListBooksHold = []
@@ -69,7 +68,7 @@ const ReadingList = (props) => {
     const copyOfAllBooks = [...readingListArray]
     
     copyOfAllBooks.filter((book) => {
-      console.log(book.bookObj.id)
+      
       return book.bookObj.id === bookId
         ? dbRef.child(book.uniqueKey).remove()
         : null
@@ -83,7 +82,7 @@ const ReadingList = (props) => {
       <ul className='bookShelf'>
         {readingListBooks.map((book, index) => {
           const bookData = book
-          console.log(bookData)
+         
           return (
             <Fragment key={index}>
                 <div className='reading-list-container'>

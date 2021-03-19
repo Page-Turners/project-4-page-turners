@@ -26,7 +26,7 @@ function App() {
           bookObj: bookData[bookKey],
         })
         setBooksArray(bookHold)
-        console.log(bookHold);
+        
       }
     })
   }, [])
