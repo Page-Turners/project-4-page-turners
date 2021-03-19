@@ -37,8 +37,12 @@ const ReadingList = (props) => {
         
         if (sortData[bookKey].hasRead === true) {
           completedBookHold.push(sortData[bookKey])
+          console.log('completed')
+          console.log(sortData[bookKey])
         } else {
           readingListBooksHold.push(sortData[bookKey])
+          console.log('other')
+          console .log(sortData[bookKey])
         }
       }
     })
