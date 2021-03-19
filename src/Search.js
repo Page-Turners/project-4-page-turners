@@ -33,7 +33,7 @@ function Search(props) {
         setSearchResult(res.data.items)
       })
     } catch (error) {
-      alert('Page Not Found')
+      console.log(error)
     }
   }
 
