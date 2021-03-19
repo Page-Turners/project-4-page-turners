@@ -48,7 +48,7 @@ const ReadingList = (props) => {
     })
     setBooksCompleted(completedBookHold)
     setReadingListBooks(readingListBooksHold)
-  }, [booksCompleted])
+  }, [booksCompleted.hasRead])
 
   // returns how many books the user has read vs how many are left in the reading list
   const percentRead = () => {
