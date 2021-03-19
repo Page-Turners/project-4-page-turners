@@ -1,7 +1,6 @@
 /* Font Styles */
 
 @import url('https://fonts.googleapis.com/css2?family=Maitree&family=Montserrat&display=swap');
-
 /* Setup Snippet */
 html {
   line-height: 1.15;
@@ -193,7 +192,6 @@ template {
 [hidden] {
   display: none;
 }
-
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -202,13 +200,11 @@ template {
   clear: both;
   height: 0;
 }
-
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 .visuallyHidden:not(:focus):not(:active) {
   position: absolute;
   width: 1px;
@@ -221,7 +217,6 @@ template {
   clip: rect(00 0 0);
   overflow: hidden;
 }
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -234,18 +229,15 @@ template {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
-
 /* Global Styles */
 html {
   font-size: 62.5%;
   height: 100vh;
   background-color: #fbdebe;
 }
-
 /* * {
   border: 1px black solid;
 } */
-
 body {
   font-family: 'Montserrat', sans-serif;
   font-style: 2rem;
@@ -255,9 +247,7 @@ body {
   width: 90%;
   margin: 0 auto;
 }
-
 /* Header Styles */
-
 header {
   display: grid;
   justify-content: center;
@@ -265,13 +255,11 @@ header {
   background-color: #aca9bb;
   /* height: 10vh; */
 }
-
 h1 {
   font-size: 6rem;
   text-decoration: none;
   color: #fbdebe;
   text-shadow: 4px 3px 0 #7A7A7A;
-  
 }
 h1,
 h2,
@@ -281,21 +269,18 @@ h4 {
 }
 h2 {
   font-size: 2.5rem;
+  line-height: 1;
 }
-
 h3 {
   font-size: 2rem;
 }
-
 p {
   font-size: 1.75rem;
 }
-
 h3,
 p {
   margin: 2px;
 }
-
 .bookMark {
   font-size: 30px;
   color: #cbe8ec;
@@ -307,12 +292,9 @@ p {
   right: 0;
   cursor: pointer;
 }
-
 a:link {
   text-decoration: none;
 }
-
-
 /* Form Field */
 input,
 label,
@@ -331,12 +313,10 @@ fieldset {
   width: 100%;
   text-align: center;
 }
-
 form {
   padding: 10px;
   text-align: center;
 }
-
 .search-bar {
   width: 90%;
   height: 50px;
@@ -345,22 +325,18 @@ form {
   border: none;
   padding: 15px;
 }
-
 ::placeholder {
   font-size: 20px;
   text-align: center;
 }
-
 input[type='radio'] {
   padding: 10px;
   margin: 10px;
   cursor: pointer;
 }
-
 .radio-label {
   font-size: 2.5rem;
 }
-
 .search-button {
   /* font-family: 'Maitree', serif; */
   font-family: 'Montserrat', sans-serif;
@@ -375,16 +351,13 @@ input[type='radio'] {
   background-color: #fbdebe;
   color: black;
 }
-
 button {
   border-radius: 40px;
 }
-
 /* Grid of Books */
 main {
   background-color: #fbdebe;
 }
-
 .search-container {
   display: grid;
   gap: 4rem;
@@ -392,27 +365,25 @@ main {
   padding: 5% 0;
   /* background-color: #CBE8EC; */
 }
-
 .book {
   display: grid;
   justify-content: center;
   text-align: center;
-  background-color: #fbdebe;
+  background-color: #cbe8ec;
+  box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.75);
+  padding: 1.5rem;
 }
 .image-container {
   height: 200px;
   width: 200px;
   justify-self: center;
 }
-
 .book img {
   height: 100%;
 }
-
 h3 {
   font-size: 1.8rem;
 }
-
 .bookMark {
   /* position: absolute;
   top:3%;
@@ -420,23 +391,32 @@ h3 {
   font-size: 40px;
   color: #cbe8ec;
 }
-
 .bookMark:hover {
   color: #fbdebe;
   font-size: 45px;
 }
-
 .icon-button {
   position: absolute;
   top: 3%;
   right: 3%;
   padding: 10px;
 }
-
 /* .icon-button:hover {
   background-color:#FBDEBE;
 } */
-
+.search-results-button {
+  outline: none;
+  background-color: #aca9bb;
+  color: white;
+  border: none;
+  margin: 3px;
+  padding: 7px;
+  cursor: pointer;
+  font-size: 2rem;
+  width:70%;
+  height: 40px;
+  justify-self: center;
+}
 button {
   outline: none;
   background-color: #aca9bb;
@@ -447,9 +427,7 @@ button {
   cursor: pointer;
   font-size: 2.5rem;
 }
-
 /* Reading List*/
-
 .bookShelf,
 .completedShelf {
   display: grid;
@@ -459,37 +437,35 @@ button {
   border: 2px solid #aca9bb;
   border-radius: 30px;
 }
-
 .readingListTitle {
+  padding-top: 20px;
   text-align: center;
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  color: #aca9bb;
+  font-size: 2.25rem;
+  /* text-shadow: 4px 3px 0 #7A7A7A; */
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000; */
 }
-
 /* Completed List */
 .completedListTitle {
   text-align: center;
   color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  text-shadow: 2px 2px #FF0000;
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000; */
 }
-
 /* Reading Progress */
 .readingProgress {
   border: 2px solid #aca9bb;
   border-radius: 30px;
 }
-
 .readingPercentage {
   text-align: center;
   color: white;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
 }
-
 /* footer */
-
 footer {
   text-align: center;
   font-size: 2.5rem;
@@ -499,19 +475,27 @@ footer {
   top: 200px;
   padding:2rem;
 }
-
 a {
   color: black;
 }
-
-
 /* Media Queries */
-
 @media only screen and (max-width: 600px) {
   .icon-button {
     position: absolute;
-    top: 20%;
+    top: 15%;
     right: 44%;
+    padding: 10px;
+    border: 5px solid white;
+  }
+  .book {
+    box-shadow: none;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .icon-button {
+    position: absolute;
+    top: 25%;
+    right: 40%;
     padding: 10px;
     border: 5px solid white;
   }
