@@ -152,7 +152,7 @@ const ReadingList = (props) => {
             <Fragment key={index}>
               <div className='book'>
                 <div className='image-container'>
-                  {completedBookData.volumeInfo.imageLinks ? (
+                  {completedBookData.volumeInfo ? (
                     <img
                       src={completedBookData.volumeInfo.imageLinks.thumbnail}
                       alt={completedBookData.volumeInfo.title}
