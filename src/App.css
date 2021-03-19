@@ -432,10 +432,15 @@ button {
   display: grid;
   gap: 4rem;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
-  padding: 5% 0;
+  padding: 5% 5%;
   border: 2px solid #aca9bb;
   border-radius: 30px;
 }
+
+.completedShelf {
+  background-color: #aca9bb;
+}
+
 .readingListTitle {
   padding-top: 20px;
   text-align: center;
@@ -453,6 +458,17 @@ button {
   font-size: 4rem;
   /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000; */
+}
+
+.complete-button {
+  outline: none;
+  background-color: #aca9bb;
+  color: white;
+  border: none;
+  margin: 3px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 2.5rem;
 }
 /* Reading Progress */
 .readingProgress {

@@ -133,7 +133,7 @@ const ReadingList = (props) => {
               <p></p>
             )}
 
-                <button onClick={() => handleComplete(bookData.id)}>
+                <button className="complete-button" onClick={() => handleComplete(bookData.id)}>
                   Complete!
                 </button>
               
