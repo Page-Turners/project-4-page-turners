@@ -281,10 +281,12 @@ h4 {
 }
 h2 {
   font-size: 2.5rem;
+  line-height: 1;
 }
 
 h3 {
   font-size: 2rem;
+  
 }
 
 p {
@@ -397,12 +399,16 @@ main {
   display: grid;
   justify-content: center;
   text-align: center;
-  background-color: #fbdebe;
+  background-color: #cbe8ec;
+  box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.75);
+  padding: 1.5rem;
+
 }
 .image-container {
   height: 200px;
   width: 200px;
   justify-self: center;
+
 }
 
 .book img {
@@ -437,6 +443,22 @@ h3 {
   background-color:#FBDEBE;
 } */
 
+.search-results-button {
+  outline: none;
+  background-color: #aca9bb;
+  color: white;
+  border: none;
+  margin: 3px;
+  padding: 7px;
+  cursor: pointer;
+  font-size: 2rem;
+  width:70%;
+  height: 40px;
+  justify-self: center;
+
+
+}
+
 button {
   outline: none;
   background-color: #aca9bb;
@@ -461,18 +483,22 @@ button {
 }
 
 .readingListTitle {
+  padding-top: 20px;
   text-align: center;
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  color: #aca9bb;
+  font-size: 2.25rem;
+  /* text-shadow: 4px 3px 0 #7A7A7A; */
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000; */
 }
 
 /* Completed List */
 .completedListTitle {
   text-align: center;
   color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  text-shadow: 2px 2px #FF0000;
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000; */
 }
 
 /* Reading Progress */
@@ -507,11 +533,27 @@ a {
 
 /* Media Queries */
 
+
 @media only screen and (max-width: 600px) {
   .icon-button {
     position: absolute;
-    top: 20%;
+    top: 15%;
     right: 44%;
+    padding: 10px;
+    border: 5px solid white;
+  }
+
+
+  .book {
+    box-shadow: none;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .icon-button {
+    position: absolute;
+    top: 25%;
+    right: 40%;
     padding: 10px;
     border: 5px solid white;
   }

@@ -135,7 +135,7 @@ function Search(props) {
             )}
 
 
-            <button onClick={() => checkDuplicate(bookResult)}>
+            <button className="search-results-button" onClick={() => checkDuplicate(bookResult)}>
               Add to List!
             </button>
            
