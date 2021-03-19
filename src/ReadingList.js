@@ -42,8 +42,7 @@ const ReadingList = (props) => {
           console.log(sortData[bookKey])
         } else {
           readingListBooksHold.push(sortData[bookKey])
-          console.log('other')
-          console .log(sortData[bookKey])
+          
         }
       }
     })
